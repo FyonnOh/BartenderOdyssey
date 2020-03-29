@@ -1,0 +1,18 @@
+fileFormatVersion: 2
+guid: 410c6578c8fbdab4688a2d9fc50b1f99
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-US
+  stringIDs: []
+  compilationStatus: 0
+  isSuccesfullyCompiled: 0
+  compilationErrorMessage: "Error on line 5 at position 4:\nmismatched input '\\n'
+    expecting ':'\r\n===\r\n   ^"
+  baseLanguage: {instanceID: 0}
+  localizations: []
