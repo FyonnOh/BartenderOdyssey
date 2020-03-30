@@ -17,12 +17,14 @@ public class WaypointControl : MonoBehaviour
     public GameObject player;
     private string currWaypoint = "entrance";
 
+    static Animator anim;
+
     private bool isMoving = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = GetComponent<Animator>();
     }
 
     private bool IsInMeleeRangeOf(Transform target)
@@ -62,6 +64,29 @@ public class WaypointControl : MonoBehaviour
             currWaypoint = "waypoint2";
         }
 
+        if (Input.GetKey("s"))
+        {
+            anim.SetBool("isPointing", true);
+            anim.SetBool("isIdle", false);
+        } 
+        else if (Input.GetKey("d"))
+        {
+            anim.SetBool("isHoldingDrink", true);
+            anim.SetBool("isIdle", false);
+            if (Input.GetKey("f"))
+            {
+                anim.SetBool("isDrinking", true);
+            } else
+            {
+                anim.SetBool("isDrinking", false);
+            }
+        }
+        else {
+            anim.SetBool("isPointing", false);
+            anim.SetBool("isDrinking", false);
+            anim.SetBool("isHoldingDrink", false);
+            anim.SetBool("isIdle", true);
+        }
 
         /*
         if (isMoving) 
@@ -75,7 +100,7 @@ public class WaypointControl : MonoBehaviour
                 agent.SetDestination(waypoint.transform.position);
             }
         }*/
- 
+
         if (currWaypoint == "waypoint1" && IsInMeleeRangeOf(player.transform))
         {
             RotateTowards(player.transform);
