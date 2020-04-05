@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityStandardAssets.Characters.ThirdPerson;
+using Yarn.Unity;
 
 public class WaypointControl : MonoBehaviour
 {
@@ -89,5 +90,23 @@ public class WaypointControl : MonoBehaviour
             character.Move(Vector3.zero, false, false);
         }
 
+    }
+
+    [YarnCommand("movetonextwaypoint")]
+    public void MoveToNextWaypoint()
+    {
+        Debug.Log("Moving to next waypoint");
+        if (currWaypoint == "entrance")
+        {
+            agent.SetDestination(waypoint1.transform.position);
+            isMoving = true;
+            currWaypoint = "waypoint1";
+        }
+        else if (currWaypoint == "waypoint1")
+        {
+            agent.SetDestination(waypoint2.transform.position);
+            isMoving = true;
+            currWaypoint = "waypoint2";
+        }
     }
 }

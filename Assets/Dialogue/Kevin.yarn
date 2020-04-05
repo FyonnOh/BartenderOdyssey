@@ -1,0 +1,14 @@
+title: Kevin
+tags: 
+---
+Kevin: Hello, my fellow drinker. My name is Kevin. What is yours?
+<<movetonextwaypoint Human>>
+Arthur: Greetings, Kevin. I am Sir Arthur of the 54th Division of the Revolutionary Army.
+Arthur: 'Tis a fine night to be downing some Oily Mary, eh?
+<<movetonextwaypoint Human>>
+Kevin: Sir Kevin! It is an honour to meet you, sir!
+Kevin: Yes, indeed!
+Kevin: How has life been in retirement, sir?
+Arthur: Oh, you know. The same old, same old.
+Kevin: Interesting...
+===
