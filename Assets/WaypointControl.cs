@@ -20,6 +20,12 @@ public class WaypointControl : MonoBehaviour
 
     private bool isMoving = false;
 
+    void Awake()
+    {
+        DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
+        dialogueRunner.AddCommandHandler("waitForMove", WaitForMove);
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -82,31 +88,46 @@ public class WaypointControl : MonoBehaviour
             RotateTowards(player.transform);
         }
 
-        if (agent.remainingDistance > agent.stoppingDistance)
-        {
-            character.Move(agent.desiredVelocity, false, false);
-        } else
-        {
-            character.Move(Vector3.zero, false, false);
-        }
+        // if (agent.remainingDistance > agent.stoppingDistance)
+        // {
+        //     character.Move(agent.desiredVelocity, false, false);
+        // } else
+        // {
+        //     character.Move(Vector3.zero, false, false);
+        // }
 
     }
 
-    [YarnCommand("movetonextwaypoint")]
+    [YarnCommand("moveToNextWaypoint")]
     public void MoveToNextWaypoint()
     {
         Debug.Log("Moving to next waypoint");
-        if (currWaypoint == "entrance")
-        {
-            agent.SetDestination(waypoint1.transform.position);
-            isMoving = true;
-            currWaypoint = "waypoint1";
-        }
-        else if (currWaypoint == "waypoint1")
+        if (currWaypoint == "waypoint1" || currWaypoint == "entrance")
         {
             agent.SetDestination(waypoint2.transform.position);
             isMoving = true;
             currWaypoint = "waypoint2";
         }
+        else if (currWaypoint == "waypoint2")
+        {
+            agent.SetDestination(waypoint1.transform.position);
+            isMoving = true;
+            currWaypoint = "waypoint1";
+        }
+    }
+
+    private void WaitForMove(string[] parameters, System.Action onComplete)
+    {
+        StartCoroutine(DoWaitForMove(onComplete));
+    }
+
+    private IEnumerator DoWaitForMove(System.Action onComplete)
+    {
+        while (agent.pathPending || agent.remainingDistance > 0.5f)
+        {
+            Debug.Log($"Remaining distance: {agent.remainingDistance}; Path pending: {agent.pathPending}");
+            yield return null;
+        }
+        onComplete();
     }
 }
