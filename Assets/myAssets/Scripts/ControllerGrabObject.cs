@@ -40,10 +40,12 @@ public class ControllerGrabObject : MonoBehaviour
     private Color highlightColor = new Color(1f, 1f, 1f, 0.2f);
 
     private GameObject collidingObject;
-    private GameObject objectInHand;
+    private GameObject objectInHand = null;
     private string colliderName = "";
 
     public RedButton redButton;
+    public MixerScript mixerScript;
+    public TopCoverCollider coverCollider;
 
     public string CollidingWith()
     {
@@ -65,15 +67,16 @@ public class ControllerGrabObject : MonoBehaviour
     {
         SetCollidingObject(other);
 
-        if (other.gameObject.CompareTag("Grabbable") || other.gameObject.CompareTag("Button"))
+        if (!isGrab && (other.gameObject.CompareTag("Grabbable") || other.gameObject.CompareTag("Button")))
         {
-            highlightObject();
+            //highlightObject();
+            if (gameObject.name.Contains("right"))
+                hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.RightHand);
+            if (gameObject.name.Contains("left"))
+                hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.LeftHand);
         }
 
-        if (gameObject.name.Contains("right"))
-            hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.RightHand);
-        if (gameObject.name.Contains("left"))
-            hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.LeftHand);
+        vibrateController();
     }
 
     public void OnTriggerStay(Collider other)
@@ -82,7 +85,7 @@ public class ControllerGrabObject : MonoBehaviour
 
         if (other.gameObject.CompareTag("Grabbable") || other.gameObject.CompareTag("Button"))
         {
-            highlightObject();
+            //highlightObject();
         }
     }
 
@@ -96,11 +99,20 @@ public class ControllerGrabObject : MonoBehaviour
 
         if (other.gameObject.CompareTag("Grabbable") || other.gameObject.CompareTag("Button"))
         {
-            unhighlightObject();
+            //unhighlightObject();
         }
 
         collidingObject = null;
     }
+
+    public void vibrateController()
+    {
+        if (gameObject.name.Contains("right"))
+            hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.RightHand);
+        if (gameObject.name.Contains("left"))
+            hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.LeftHand);
+    }
+
 
     private void highlightObject()
     {
@@ -134,6 +146,16 @@ public class ControllerGrabObject : MonoBehaviour
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
     }
 
+    public string getObjName()
+    {
+        return objectInHand.name;
+    }
+
+    public bool getGrabStatus()
+    {
+        return isGrab;
+    }
+
     private FixedJoint AddFixedJoint()
     {
         FixedJoint fx = gameObject.AddComponent<FixedJoint>();
@@ -150,6 +172,11 @@ public class ControllerGrabObject : MonoBehaviour
             GetComponent<FixedJoint>().connectedBody = null;
             Destroy(GetComponent<FixedJoint>());
             isGrab = false;
+
+            if ((objectInHand.name.Equals("Mixer") || objectInHand.name.Equals("Top Cover")) && coverCollider.getStatus())
+            {
+                mixerScript.addCover();
+            }
 
             objectInHand.GetComponent<Rigidbody>().velocity = controllerPose.GetVelocity();
             objectInHand.GetComponent<Rigidbody>().angularVelocity = controllerPose.GetAngularVelocity();
@@ -238,7 +265,12 @@ public class ControllerGrabObject : MonoBehaviour
         {
             print(collidingObject);
         }
-       
+
+        if (Input.GetKeyDown(KeyCode.X))
+        {
+            mixerScript.toggleCover();
+        }
+
         if (collidingObject)
         {
             if (grabAction.GetLastStateDown(handType))

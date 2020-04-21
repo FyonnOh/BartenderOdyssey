@@ -8,11 +8,16 @@ public class PillDispenser : MonoBehaviour
     public GameObject pill;
     public AudioSource buttonSound;
 
+    private GameObject pillClone;
+    private int pillCounter = 0;
+
     public void DispensePill()
     {
         //print("Dispensing Pill");
         buttonSound.Play();
-        Instantiate(pill, spawnPosition.position, spawnPosition.rotation);
+        pillClone = Instantiate(pill, spawnPosition.position, spawnPosition.rotation);
+        pillCounter += 1;
+        pillClone.name = pill.name + pillCounter;
     }
 
     // Start is called before the first frame update
