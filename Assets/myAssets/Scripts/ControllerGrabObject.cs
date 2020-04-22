@@ -136,7 +136,7 @@ public class ControllerGrabObject : MonoBehaviour
     }
     private void GrabObject()
     {
-        print("grabbing object...");
+        //print("grabbing object...");
         isGrab = true;
         objectInHand = collidingObject;
         collidingObject = null;
