@@ -12,22 +12,18 @@ namespace Yarn.Unity.BartenderOdyssey
         // the text UI to display the character's lines
         public Text speechText;
         public Image background;
+        public GameObject nextButton;
 
         void Awake()
         {
             // Get the name of the NPC
             characterName = this.gameObject.GetComponentInParent<NPC>().characterName;
             Debug.Log($"Character name is {characterName}");
-            // Hide the speech text when the game starts
-            if (speechText != null)
-            {
-                speechText.enabled = false;
-                background.enabled = false;
-            }
-            else
-            {
-                Debug.LogError("There is no text UI element registered to the speech bubble.");
-            }
+
+            // Hide the speech bubble and buttons when the game starts
+            speechText?.enabled = false;
+            background?.enabled = false;
+            nextButton?.enabled = false;
         }
 
         public void OnDialogueStart()
@@ -46,36 +42,30 @@ namespace Yarn.Unity.BartenderOdyssey
 
         public void OnLineStart()
         {
-            if (speechText != null)
-            {
-                speechText.enabled = true;
-                background.enabled = true;
-            }
+            speechText?.enabled = true;
+            background?.enabled = true;
+            nextButton?.enabled = false;
         }
 
+        // Use this for things like displaying response options
+        // for the player to choose, or enabling input to continue
+        // to the next line.
         public void OnLineFinishDisplaying()
         {
-            // Default implementation is empty.
-            // Use this for things like displaying response options
-            // for the player to choose, or enabling input to continue
-            // to the next line.
+            // Show the next button to advance the dialogue
+            nextButton?.enabled = true;
         }
 
         public void OnLineUpdate(string line)
         {
-            if (speechText != null)
-            {
-                speechText.text = line;
-            }
+            speechText?.text = line;
         }
 
         public void OnLineEnd()
         {
-            if (speechText != null)
-            {
-                speechText.enabled = false;
-                background.enabled = false;
-            }
+            speechText?.enabled = false;
+            background?.enabled = false;
+            nextButton?.enabled = false;
         }
 
         public void OnOptionsStart()
