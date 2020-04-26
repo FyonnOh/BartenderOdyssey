@@ -93,7 +93,7 @@ namespace Yarn.Unity
 
             string characterName = GetCharacterSpeaking(text);
             SpeechBubble speechBubble = _dialogueContainers[characterName];
-            speechBubble.OnLineStart();
+            speechBubble.OnLineStart(text);
             text = RemoveCharacterName(text);
 
             if (textSpeed > 0.0f) {
