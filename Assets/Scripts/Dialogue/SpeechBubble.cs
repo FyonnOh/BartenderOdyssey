@@ -21,30 +21,31 @@ namespace Yarn.Unity.BartenderOdyssey
             Debug.Log($"Character name is {characterName}");
 
             // Hide the speech bubble and buttons when the game starts
-            speechText?.enabled = false;
-            background?.enabled = false;
-            nextButton?.enabled = false;
+            if (speechText != null && background != null && nextButton != null) {
+                SetActive(false);
+            }
         }
 
         public void OnDialogueStart()
         {
             // Default implementation is empty.
-            // You can use this to disable controls during
+            // You can use this to disable user controls during
             // a dialogue.
         }
 
         public void OnDialogueEnd()
         {
             // Default implementation is empty.
-            // You can use this to re-enable controls after
+            // You can use this to re-enable user controls after
             // a dialogue.
         }
 
         public void OnLineStart()
         {
-            speechText?.enabled = true;
-            background?.enabled = true;
-            nextButton?.enabled = false;
+            if (speechText != null && background != null && nextButton != null) {
+                ShowSpeechBubble(true);
+                ShowOptions(false);
+            }
         }
 
         // Use this for things like displaying response options
@@ -53,19 +54,24 @@ namespace Yarn.Unity.BartenderOdyssey
         public void OnLineFinishDisplaying()
         {
             // Show the next button to advance the dialogue
-            nextButton?.enabled = true;
+            if (nextButton != null) {
+                ShowOptions(true);
+            }
         }
 
         public void OnLineUpdate(string line)
         {
-            speechText?.text = line;
+            if (speechText != null) {
+                speechText.text = line;
+            }
         }
 
         public void OnLineEnd()
         {
-            speechText?.enabled = false;
-            background?.enabled = false;
-            nextButton?.enabled = false;
+            if (speechText != null && background != null && nextButton != null) {
+                ShowSpeechBubble(false);
+                ShowOptions(false);
+            }
         }
 
         public void OnOptionsStart()
@@ -85,7 +91,17 @@ namespace Yarn.Unity.BartenderOdyssey
 
         public void SetActive(bool setActive)
         {
-            this.gameObject.SetActive(setActive);
+            ShowSpeechBubble(setActive);
+            ShowOptions(setActive);
+        }
+
+        private void ShowSpeechBubble(bool show) {
+            speechText.gameObject.SetActive(show);
+            background.gameObject.SetActive(show);
+        }
+
+        private void ShowOptions(bool show) {
+            nextButton.gameObject.SetActive(show);
         }
     }
 }
