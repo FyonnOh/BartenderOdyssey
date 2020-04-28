@@ -11,6 +11,7 @@ namespace Yarn.Unity.BartenderOdyssey
 
         // the text UI to display the character's lines
         public Text speechText;
+        public Text sizerText;
         public Image background;
 
         void Awake()
@@ -44,17 +45,12 @@ namespace Yarn.Unity.BartenderOdyssey
         {
             Debug.Log($"(SpeechBubble.cs) line: {fullText}");
 
-            // Dynamically resize the speech bubble to fit the line
-            if (!string.IsNullOrEmpty(fullText)) 
+            // Set the invisible text to dynamically resize the speech bubble
+            if (sizerText != null) 
             {
-                TextGenerationSettings settings = speechText.GetGenerationSettings(speechText.rectTransform.rect.size);
-
-                float width = speechText.cachedTextGeneratorForLayout.GetPreferredWidth(fullText, settings);
-                float height = speechText.cachedTextGeneratorForLayout.GetPreferredHeight(fullText, settings);
-
-                Debug.Log($"Width: {speechText.preferredWidth}; Height: {speechText.preferredHeight}");
-                Debug.Log($"Width: {width}; Height: {height}");
+                sizerText.text = fullText;
             }
+            
 
             if (speechText != null && background != null) 
             {

@@ -65,7 +65,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: da793e454240dfc4585bd4e6e21ece3f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 567908647b94fe14db29715b3fdaf2de, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -88,8 +88,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Padding:
-    m_Left: 110
-    m_Right: 110
+    m_Left: 70
+    m_Right: 70
     m_Top: 70
     m_Bottom: 160
   m_ChildAlignment: 0
@@ -250,6 +250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speechText: {fileID: 1481924954013288827}
+  sizerText: {fileID: 7386231507871277825}
   background: {fileID: 1481924952848870909}
 --- !u!114 &5878656315195595576
 MonoBehaviour:
@@ -342,7 +343,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7eeb45e0d4865794693a91db09e8abca, type: 3}
+    m_Font: {fileID: 12800000, guid: e910c2b52f8b27041ae28126569ffb2a, type: 3}
     m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
@@ -354,13 +355,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '4 LINES
-
-    OF
-
-    GLORIOUSSSSSSSSSSS
-
-    TEXT'
+  m_Text: Dialogue Text
 --- !u!114 &4357694631422654758
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,7 +445,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 12800000, guid: 7eeb45e0d4865794693a91db09e8abca, type: 3}
+    m_Font: {fileID: 12800000, guid: e910c2b52f8b27041ae28126569ffb2a, type: 3}
     m_FontSize: 72
     m_FontStyle: 0
     m_BestFit: 0
@@ -462,10 +457,4 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: '4 LINES
-
-    OF
-
-    GLORIOUS
-
-    TEXT'
+  m_Text: 
