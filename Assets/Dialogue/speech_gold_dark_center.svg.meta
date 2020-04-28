@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: feaadbd70b393464e8f980b12be26bcc
+guid: d110996484183a942af2a3227b612bd9
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -18,9 +18,9 @@ ScriptedImporter:
   viewportOptions: 0
   preserveViewport: 0
   advancedMode: 0
-  predefinedResolutionIndex: 0
-  targetResolution: 2160
-  resolutionMultiplier: 10
+  predefinedResolutionIndex: 1
+  targetResolution: 1080
+  resolutionMultiplier: 1
   stepDistance: 10
   samplingStepDistance: 100
   maxCordDeviationEnabled: 0
@@ -39,17 +39,17 @@ ScriptedImporter:
   spriteData:
     TessellationDetail: 0
     SpriteRect:
-      name: speech_bubble_gold
+      name: 
       originalName: 
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       alignment: 0
       border: {x: 0, y: 0, z: 0, w: 0}
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 256
-        height: 200
-      spriteID: ca452705300ee2244b666cf2a2215ab6
+        width: 0
+        height: 0
+      spriteID: 9e1ff74b1ec3a05459c85fa0b7f70fb1
       internalID: 0
     PhysicsOutlines: []
