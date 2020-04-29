@@ -5,7 +5,7 @@ using UnityEngine;
 public class CupLiquid : MonoBehaviour
 {
     public GameObject liquid;
-    public float fillSpeed;
+    public float fillSpeed = 0.001f;
     private float fill = 1.0f; // 1 when empty, 0 when full
     private float minFill = 0.53f;
     private float maxFill = 0.46f;
