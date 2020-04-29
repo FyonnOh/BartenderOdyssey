@@ -1,0 +1,33 @@
+fileFormatVersion: 2
+guid: b7a845e68c81b3c4cb73beaabfa8ea6c
+ScriptedImporter:
+  internalIDToNameTable: []
+  externalObjects: {}
+  serializedVersion: 2
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
+  script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
+  baseLanguageID: en-SG
+  stringIDs:
+  - Scene3-Scene3-0
+  - Scene3-Scene3-1
+  - Scene3-Scene3-2
+  - Scene3-Scene3-3
+  - Scene3-Scene3-4
+  - Scene3-Scene3-5
+  - Scene3-Scene3-6
+  - Scene3-Scene3-7
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
+  compilationErrorMessage: 'Error on line 1 at position 1:
+
+    mismatched input
+    ''<EOF>'' expecting ''title:''
+
+
+
+'
+  baseLanguage: {fileID: 7128917941130120860, guid: b7a845e68c81b3c4cb73beaabfa8ea6c,
+    type: 3}
+  localizations: []

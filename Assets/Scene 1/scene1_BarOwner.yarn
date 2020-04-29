@@ -1,0 +1,12 @@
+title: scene1_BarOwner
+tags: 
+---
+<<walkToPlayer BarOwner>>
+<<waitForMove BarOwner>>
+<<talkToPlayer BarOwner>>
+<<wait 1>>
+BarOwner: Hello Deckard. It is your first day of work today. 
+BarOwner: Oh don't be nervous, you will be fine. You better start practising before the customers start coming!
+BarOwner: You better start practising before the customers start coming!
+<<loadNextLevel BarOwner>>
+===
