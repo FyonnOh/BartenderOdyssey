@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,13 +12,10 @@ namespace Yarn.Unity.BartenderOdyssey
 
         // the text UI to display the character's lines
         public Text speechText;
-        // public virtual Component<Text> SpeechText 
-        // { 
-        //     get { return this._speechText.GetComponent<Text>(); } 
-        //     set { this._speechText = value.gameObject; }
-        // }
+        
         public Text sizerText;
         public Image background;
+        private List<AudioClip> clips;
 
         void Awake()
         {
@@ -30,6 +28,13 @@ namespace Yarn.Unity.BartenderOdyssey
             {
                 SetActive(false);
             }
+
+            clips = new List<AudioClip>();
+        }
+
+        void Start()
+        {
+            // SetSpeechStyle(SoundEffectType.Talking);
         }
 
         public virtual void OnDialogueStart()
@@ -48,20 +53,19 @@ namespace Yarn.Unity.BartenderOdyssey
 
         public virtual void OnLineStart(string fullText = "")
         {
-            Debug.Log($"(SpeechBubble.cs) line: {fullText}");
-
             // Set the invisible text to dynamically resize the speech bubble
             if (sizerText != null) 
             {
                 sizerText.text = fullText;
             }
             
-
             if (speechText != null && background != null) 
             {
                 ShowSpeechBubble(true);
                 ShowOptions(false);
             }
+
+            AudioManager.instance.SpeakWordsOnLoop(clips);
         }
 
         // Use this for things like displaying response options
@@ -69,11 +73,7 @@ namespace Yarn.Unity.BartenderOdyssey
         // to the next line.
         public virtual void OnLineFinishDisplaying()
         {
-            // Show the next button to advance the dialogue
-            // if (nextButton != null) 
-            // {
-            //     ShowOptions(true);
-            // }
+            AudioManager.instance.StillSpeaking = false;
         }
 
         public virtual void OnLineUpdate(string line)
@@ -126,6 +126,45 @@ namespace Yarn.Unity.BartenderOdyssey
         protected virtual void ShowOptions(bool show) 
         {
             // nextButton.gameObject.SetActive(show);
+        }
+
+        [YarnCommand("setSpeechStyle")]
+        public void SetSpeechStyle(string style)
+        {
+            if (Enum.TryParse(style, out SoundEffectType set))
+            {
+                SetSpeechStyle(set);
+            }
+            else
+            {
+                Debug.LogError($"No matching speech style for {style}");
+            }
+        }
+
+        public void SetSpeechStyle(SoundEffectType style)
+        {
+            string[] clipsToLoad = null;
+            switch (style)
+            {
+                case SoundEffectType.Typing:
+                    clipsToLoad = SoundEffects.TypingClips;
+                    break;
+                case SoundEffectType.Talking:
+                    clipsToLoad = SoundEffects.TalkingClips;
+                    break;
+                default:
+                    Debug.Log($"Invalid speech style {style}");
+                    break;
+            }
+            
+            if (clipsToLoad != null)
+            {
+                clips.Clear();
+                foreach (string clipFile in clipsToLoad)
+                {
+                    clips.Add(Resources.Load<AudioClip>(clipFile));
+                }
+            }
         }
     }
 }

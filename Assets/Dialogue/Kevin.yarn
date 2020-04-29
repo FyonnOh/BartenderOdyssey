@@ -4,8 +4,12 @@ tags:
 Kevin: Hello, my fellow drinker. My name is Kevin. What is yours?
 <<moveToNextWaypoint Human>>
 <<waitForMove Human>>
+<<playBgm AudioManager Happy>>
 Arthur: Greetings, Kevin. I am Sir Arthur of the 54th Division of the Revolutionary Army.
 Arthur: 'Tis a fine night to be downing some Oily Mary, eh?
+<<fadeOutBgm AudioManager 3>>
+<<wait 3>>
+<<playBgm AudioManager Sad>>
 <<moveToNextWaypoint Human>>
 <<waitForMove Human>>
 Kevin: Sir Kevin! It is an honour to meet you, sir!

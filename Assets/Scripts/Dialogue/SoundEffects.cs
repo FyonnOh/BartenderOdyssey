@@ -4,6 +4,9 @@ using UnityEngine;
 
 public static class SoundEffects
 {
+    public static string BgmHappy { get{return "bensound-slowmotion";} }
+    public static string BgmSad { get{return "bensound-tomorrow";} }
+
     public static string[] TypingClips
     {
         get
@@ -15,9 +18,32 @@ public static class SoundEffects
             };
         }
     }
+
+    public static string[] TalkingClips
+    {
+        get
+        {
+            return new string[] 
+            {
+                "Talking-01",
+                "Talking-02",
+                "Talking-03",
+                "Talking-04",
+                "Talking-05",
+                "Talking-06",
+                "Talking-07",
+                "Talking-08",
+            };
+        }
+    }
 }
 
 public enum SoundEffectType
 {
-    Typing
+    Typing,
+    Talking,
+    Happy,
+    Sad,
+    Normal
+
 }
