@@ -1,0 +1,19 @@
+title: Introduction
+tags: 
+---
+<<wait 0.5>>
+<<fadeInTitle IntroPanel 2.5>>
+<<wait 0.5>>
+Intro: This story takes place in a post-modernist society where the advancements in technology has brought about the creation of a novel species, the Androids.
+<<wait 0.5>>
+Intro: Androids are essentially synthetic beings designed to think and work like humans.
+<<wait 0.5>>
+<<newline IntroPanel 2>>
+Intro: In this story, you will experience this world through the eyes of a bartender.
+<<wait 0.2>>
+Intro: The choices you make will affect which ending you'll get.
+<<wait 1>>
+<<newline IntroPanel 2>>
+<<markIntroEnd IntroPanel>>
+Intro: Welcome to bar Nexus.
+===

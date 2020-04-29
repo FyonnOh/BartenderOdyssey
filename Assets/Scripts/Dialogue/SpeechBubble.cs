@@ -11,6 +11,11 @@ namespace Yarn.Unity.BartenderOdyssey
 
         // the text UI to display the character's lines
         public Text speechText;
+        // public virtual Component<Text> SpeechText 
+        // { 
+        //     get { return this._speechText.GetComponent<Text>(); } 
+        //     set { this._speechText = value.gameObject; }
+        // }
         public Text sizerText;
         public Image background;
 
@@ -27,21 +32,21 @@ namespace Yarn.Unity.BartenderOdyssey
             }
         }
 
-        public void OnDialogueStart()
+        public virtual void OnDialogueStart()
         {
             // Default implementation is empty.
             // You can use this to disable user controls during
             // a dialogue.
         }
 
-        public void OnDialogueEnd()
+        public virtual void OnDialogueEnd()
         {
             // Default implementation is empty.
             // You can use this to re-enable user controls after
             // a dialogue.
         }
 
-        public void OnLineStart(string fullText = "")
+        public virtual void OnLineStart(string fullText = "")
         {
             Debug.Log($"(SpeechBubble.cs) line: {fullText}");
 
@@ -62,7 +67,7 @@ namespace Yarn.Unity.BartenderOdyssey
         // Use this for things like displaying response options
         // for the player to choose, or enabling input to continue
         // to the next line.
-        public void OnLineFinishDisplaying()
+        public virtual void OnLineFinishDisplaying()
         {
             // Show the next button to advance the dialogue
             // if (nextButton != null) 
@@ -71,7 +76,7 @@ namespace Yarn.Unity.BartenderOdyssey
             // }
         }
 
-        public void OnLineUpdate(string line)
+        public virtual void OnLineUpdate(string line)
         {
             if (speechText != null) 
             {
@@ -79,7 +84,7 @@ namespace Yarn.Unity.BartenderOdyssey
             }
         }
 
-        public void OnLineEnd()
+        public virtual void OnLineEnd()
         {
             if (speechText != null && background != null) 
             {
@@ -88,17 +93,17 @@ namespace Yarn.Unity.BartenderOdyssey
             }
         }
 
-        public void OnOptionsStart()
+        public virtual void OnOptionsStart()
         {
 
         }
 
-        public void OnOptionsEnd()
+        public virtual void OnOptionsEnd()
         {
 
         }
 
-        public void OnCommand(string command)
+        public virtual void OnCommand(string command)
         {
 
         }
@@ -109,13 +114,16 @@ namespace Yarn.Unity.BartenderOdyssey
             ShowOptions(setActive);
         }
 
-        private void ShowSpeechBubble(bool show) 
+        protected virtual void ShowSpeechBubble(bool show) 
         {
-            speechText.gameObject.SetActive(show);
-            background.gameObject.SetActive(show);
+            if (speechText != null)
+                speechText.gameObject.SetActive(show);
+
+            if (background != null)
+                background.gameObject.SetActive(show);
         }
 
-        private void ShowOptions(bool show) 
+        protected virtual void ShowOptions(bool show) 
         {
             // nextButton.gameObject.SetActive(show);
         }
