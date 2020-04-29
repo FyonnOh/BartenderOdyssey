@@ -9,15 +9,23 @@ namespace Yarn.Unity.BartenderOdyssey
     public class IntroSpeech : SpeechBubble
     {
         public TextMeshProUGUI introText;
-
+        [Tooltip("Start time for typing audio clip")]
+        public float startTime = 0f;
         [HideInInspector]
         public bool IsLineComplete { get; set; }
+        private AudioClip typingClip;
+        private AudioSource audioSource;
 
-        // public virtual Component SpeechText 
-        // { 
-        //     get { return this._speechText.GetComponent<TextMeshPro>(); } 
-        //     set { this._speechText = value; }
-        // }
+        void Start()
+        {
+            audioSource = gameObject.GetComponent<AudioSource>();
+            Debug.Log(SoundEffects.TypingClips[1]);
+
+            // Load "Keyboard-Typing-05"
+            typingClip = Resources.Load<AudioClip>(SoundEffects.TypingClips[1]);
+            audioSource.clip = typingClip;
+            Debug.Log(typingClip);
+        }
 
         public override void OnLineStart(string fullText = "")
         {
@@ -27,6 +35,11 @@ namespace Yarn.Unity.BartenderOdyssey
                 ShowSpeechBubble(true);
                 ShowOptions(false);
             }
+
+            audioSource.Stop();
+            audioSource.Play();
+            audioSource.time = startTime;
+            audioSource.loop = true;
         }
 
         public override void OnLineUpdate(string line)
@@ -51,6 +64,7 @@ namespace Yarn.Unity.BartenderOdyssey
 
         public override void OnLineFinishDisplaying()
         {
+            audioSource.Stop();
             IsLineComplete = true;
         }
 
