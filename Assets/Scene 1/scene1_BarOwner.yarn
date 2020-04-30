@@ -6,7 +6,7 @@ tags:
 <<talkToPlayer BarOwner>>
 <<wait 1>>
 BarOwner: Hello Deckard. It is your first day of work today. 
-BarOwner: Oh don't be nervous, you will be fine. You better start practising before the customers start coming!
+BarOwner: Oh don't be nervous, you will be fine.
 BarOwner: You better start practising before the customers start coming!
 <<loadNextLevel BarOwner>>
 ===

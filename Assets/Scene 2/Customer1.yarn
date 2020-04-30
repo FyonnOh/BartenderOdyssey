@@ -6,7 +6,7 @@ Customer1: Hey!
 Customer1: One Bloody Mary.
 <<wait 1>>
 <<doAngryGesture Customer2>>
-Customer2: And Martini for me. Make it quick.
+Customer2: And a Martini for me. Make it quick.
 <<wait 1>>
 Customer1: Hey!
 <<doPointingGesture Customer1>>

@@ -14,6 +14,7 @@ Intro: In this story, you will experience this world through the eyes of a barte
 Intro: The choices you make will affect which ending you'll get.
 <<wait 1>>
 <<newline IntroPanel 2>>
-<<markIntroEnd IntroPanel>>
 Intro: Welcome to bar Nexus.
+<<wait 2>>
+<<loadNextLevel IntroPanel>>
 ===

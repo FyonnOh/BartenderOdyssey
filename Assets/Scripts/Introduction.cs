@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using Yarn.Unity;
 using Yarn.Unity.BartenderOdyssey;
@@ -11,6 +12,7 @@ public class Introduction : MonoBehaviour
 {
     public Text titleText;
     public TextMeshProUGUI introText;
+    public Animator sceneAnimator;
     private bool hasIntroStarted = false;
     private bool hasIntroEnded = false;
     private DialogueRunner dialogueRunner;
@@ -70,6 +72,19 @@ public class Introduction : MonoBehaviour
     public void MarkIntroEnd()
     {
         hasIntroEnded = true;
+    }
+
+    [YarnCommand("loadNextLevel")]
+    public void loadNextLevel() {
+        StartCoroutine(LoadLevel(SceneManager.GetActiveScene().buildIndex));
+    }
+
+    IEnumerator LoadLevel(int levelIndex) {
+        //play animation
+        sceneAnimator.SetTrigger("Start");
+        //wait
+        yield return new WaitForSeconds(3);
+        SceneManager.LoadScene(levelIndex + 1);
     }
 
     private void FadeInTitle(string[] parameters, System.Action onComplete)
