@@ -663,6 +663,7 @@ MonoBehaviour:
   spawnPosition: {fileID: 7931649517804296402}
   pill: {fileID: 6448509782761745157, guid: 7e6567ea0b1ac1f42a2ca75cfef9a5b6, type: 3}
   buttonSound: {fileID: 9197541016760818231}
+  pillName: 
 --- !u!1 &4693175888253098901
 GameObject:
   m_ObjectHideFlags: 0
