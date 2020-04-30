@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1481924952848870910}
   - component: {fileID: 1481924952848870909}
   - component: {fileID: 6859183622416946507}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Speech Bubble
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -289,7 +289,7 @@ GameObject:
   - component: {fileID: 1481924954013288828}
   - component: {fileID: 1481924954013288827}
   - component: {fileID: 4357694631422654758}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Speech Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -392,7 +392,7 @@ GameObject:
   - component: {fileID: 4682979060503272095}
   - component: {fileID: 6439703957216686898}
   - component: {fileID: 7386231507871277825}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Sizer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
