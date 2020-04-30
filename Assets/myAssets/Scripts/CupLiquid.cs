@@ -5,7 +5,7 @@ using UnityEngine;
 public class CupLiquid : MonoBehaviour
 {
     public GameObject liquid;
-    public float fillSpeed = 0.001f;
+    public float fillSpeed = 0.003f;
     private float fill = 1.0f; // 1 when empty, 0 when full
     private float minFill = 0.53f;
     private float maxFill = 0.46f;
@@ -16,6 +16,11 @@ public class CupLiquid : MonoBehaviour
         if (fill < 0.0f) fill = 0.0f;
         float newFillAmount = maxFill - (fill * (maxFill - minFill));
         liquid.GetComponent<Renderer>().sharedMaterial.SetFloat("_FillAmount", newFillAmount);
+    }
+
+    public float getFill()
+    {
+        return fill;
     }
 
     // Start is called before the first frame update
@@ -30,6 +35,10 @@ public class CupLiquid : MonoBehaviour
         if (Input.GetKey("o"))
         {
             fillCup();
+        }
+        if (Input.GetKey("p"))
+        {
+            fill = 0.2f;
         }
     }
 }
