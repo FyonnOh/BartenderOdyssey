@@ -25,7 +25,10 @@ public class WaypointControl : MonoBehaviour
     void Awake()
     {
         DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
-        //dialogueRunner.AddCommandHandler("waitForMove", WaitForMove);
+
+        if (dialogueRunner != null) {
+            dialogueRunner.AddCommandHandler("waitForMove", WaitForMove);
+        }
     }
 
     // Start is called before the first frame update

@@ -64,7 +64,7 @@ namespace Yarn.Unity
             {
                 Debug.Log(container);
                 _dialogueContainers.Add(container.characterName, container);
-                _dialogueContainers[container.characterName].SetActive(false);
+                // _dialogueContainers[container.characterName].SetActive(false);
             }
 
             foreach (var button in optionButtons) {
@@ -93,7 +93,7 @@ namespace Yarn.Unity
 
             string characterName = GetCharacterSpeaking(text);
             SpeechBubble speechBubble = _dialogueContainers[characterName];
-            speechBubble.OnLineStart();
+            speechBubble.OnLineStart(text);
             text = RemoveCharacterName(text);
 
             if (textSpeed > 0.0f) {
@@ -218,7 +218,7 @@ namespace Yarn.Unity
             // Enable the dialogue controls.
             foreach (SpeechBubble container in _dialogueContainers.Values)
             {
-                container.SetActive(true);
+                // container.SetActive(true);
             }
 
             // TODO: invoke OnDialogueStart in the appropriate container
