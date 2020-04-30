@@ -112,7 +112,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/grabgrip"
+                     "output" : "/actions/default/in/return"
                   }
                },
                "mode" : "button",
@@ -214,7 +214,7 @@
             {
                "inputs" : {
                   "click" : {
-                     "output" : "/actions/default/in/grabgrip"
+                     "output" : "/actions/default/in/return"
                   }
                },
                "mode" : "button",
@@ -307,7 +307,7 @@
    "category" : "steamvr_input",
    "controller_type" : "vive_controller",
    "description" : "",
-   "name" : "My Layout [Testing] configuration for Vive Controller",
+   "name" : "Saved Layout [Testing] configuration for Vive Controller",
    "options" : {},
    "simulated_actions" : []
 }

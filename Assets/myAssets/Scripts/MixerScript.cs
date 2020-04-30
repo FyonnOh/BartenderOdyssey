@@ -8,6 +8,8 @@ public class MixerScript : MonoBehaviour
     //List<string> redJuice = new List<string>();
     List<string> redJuice = new List<string>(new string[] { "Red", "Red", "Red" });
 
+    private string currentDrink = null;
+
     //public GameObject mixerCollider;
     private int counterRed = 0;
     private int counterBlue = 0;
@@ -17,12 +19,16 @@ public class MixerScript : MonoBehaviour
 
     public GameObject coverChild;
     public GameObject topCover;
+    public GameObject nozzle;
 
     public ControllerGrabObject left;
     public ControllerGrabObject right;
 
     public AudioSource mixSound;
-    private List<string> pillList = new List<string>();  
+    private List<string> pillList = new List<string>();
+
+    public ParticleSystem mixParticle;
+    public ParticleSystem destroyParticle;
 
     private void initRedDrink()
     {
@@ -70,8 +76,35 @@ public class MixerScript : MonoBehaviour
     public void addCover()
     {
         //coverChild.SetActive(true);
+        //topCover.transform.position = coverChild.transform.position;
         topCover.transform.position = coverChild.transform.position;
+        //topCover.SetActive(false);
+
+        topCover.transform.Find("Normal Cover").GetComponent<BoxCollider>().enabled = false;
+        topCover.transform.Find("Normal Cover").GetComponent<MeshRenderer>().enabled = false;
+
+        coverChild.SetActive(true);
         isCovered = true;
+    }
+
+    public void removeCover()
+    {
+        if (isDoneMixing) destroyParticle.Play();
+        if (mixSound.isPlaying) mixSound.Stop();
+        if (mixParticle.isPlaying) mixParticle.Stop();
+        //topCover.SetActive(true);
+
+        topCover.transform.Find("Normal Cover").GetComponent<BoxCollider>().enabled = true;
+        topCover.transform.Find("Normal Cover").GetComponent<MeshRenderer>().enabled = true;
+
+        coverChild.SetActive(false);
+        isCovered = false;
+        isDoneMixing = false;
+        mixerTimer = 0.0f;
+        // TODO: Spawn a 'used up thing'
+        GetComponent<PourDetector>().enabled = false;
+        currentDrink = null;
+        nozzle.SetActive(false);
     }
 
     public void closeCover()
@@ -124,7 +157,7 @@ public class MixerScript : MonoBehaviour
         {
             if (compareRecipe(pillList, redJuice))
             {
-                setDrink("redJuice");
+                setDrink("Red Juice");
                 return;
             }
         }
@@ -135,11 +168,15 @@ public class MixerScript : MonoBehaviour
     {
         switch (name)
         {
-            case "redJuice":
+            case "Red Juice":
                 print("red juice made");
+                currentDrink = "Red Juice";
+                GetComponent<PourDetector>().enabled = true;
+                // TODO: Play success sound
                 break;
             case "fail":
                 print("no good drink made");
+                // TODO: Play fail sound
                 break;
         }
     }
@@ -151,6 +188,8 @@ public class MixerScript : MonoBehaviour
         determineDrink();
         removeMixerPills();
         resetCounters();
+        //GetComponent<PourDetector>().enabled = true;
+        nozzle.SetActive(true);
     }
 
     private void checkComponentStatus()
@@ -159,13 +198,8 @@ public class MixerScript : MonoBehaviour
         if ((left.getObjName().Equals("Mixer") && right.getObjName().Equals("Top Cover")) ||
             (right.getObjName().Equals("Mixer") && left.getObjName().Equals("Top Cover")))
         {
-            isCovered = false;
-            isDoneMixing = false;
-            mixerTimer = 0.0f;
-            if (mixSound.isPlaying)
-            {
-                mixSound.Stop();
-            }
+            removeCover();
+           
         }
     }
 
@@ -190,19 +224,30 @@ public class MixerScript : MonoBehaviour
                     mixSound.Play();
                 }
 
+                if (!mixParticle.isPlaying)
+                {
+                    mixParticle.Play();
+                }
+
                 if (mixerTimer >= 5.0f)
                 {
                     finishMixing();
                 }
                 mixerTimer += Time.deltaTime;
-                print(mixerTimer);
-            } 
-            else
+                //print(mixerTimer);
+            }
+        } 
+        else
+        {
+            if (mixSound.isPlaying)
             {
-                if (mixSound.isPlaying)
-                {
-                    mixSound.Stop();
-                }
+                mixSound.Stop();
+            }
+
+            if (mixParticle.isPlaying)
+            {
+                mixParticle.Stop();
+                print("STOP");
             }
         }
 
@@ -214,6 +259,11 @@ public class MixerScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.X))
         {
             toggleCover();
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            finishMixing();
         }
     }
 }

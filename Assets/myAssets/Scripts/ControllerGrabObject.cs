@@ -11,10 +11,15 @@ public class ControllerGrabObject : MonoBehaviour
     public SteamVR_Input_Sources handType;
     public SteamVR_Behaviour_Pose controllerPose;
     public SteamVR_Action_Boolean grabAction;
+    public SteamVR_Action_Boolean returnAction;
     public GameObject ItemPosition;
     public bool isGrab = false;
+    public bool isReturn = false;
 
     public SteamVR_Action_Vibration hapticAction;
+
+    public ControllerGrabObject left;
+    public ControllerGrabObject right;
 
     /*
     public float chargeDuration;
@@ -32,6 +37,7 @@ public class ControllerGrabObject : MonoBehaviour
     public ParticleSystem muzzleFlash;
     */
 
+    // Highlight Variables
     public Shader highlightShader;
     public Shader standardShader;
 
@@ -39,13 +45,26 @@ public class ControllerGrabObject : MonoBehaviour
     private bool isHighlighted = false;
     private Color highlightColor = new Color(1f, 1f, 1f, 0.2f);
 
+
+    // Collision Detection Variables
     private GameObject collidingObject;
     private GameObject objectInHand = null;
     private string colliderName = "";
 
+
+    // Mixing-related Variables
     public RedButton redButton;
     public MixerScript mixerScript;
     public TopCoverCollider coverCollider;
+
+    // Button variables
+    private bool isButton = false;
+    public GameObject buttonCollider;
+
+    // Return Variables
+    public GameObject mixer;
+    public GameObject mixerCover;
+    //public GameObject returnPosition;
 
     public string CollidingWith()
     {
@@ -75,6 +94,12 @@ public class ControllerGrabObject : MonoBehaviour
             if (gameObject.name.Contains("left"))
                 hapticAction.Execute(0.0f, 0.05f, 50.0f, 0.1f, SteamVR_Input_Sources.LeftHand);
         }
+        //print(other.name);
+        if (!isGrab && (other.gameObject.CompareTag("Button")))
+        {
+            buttonCollider.SetActive(true);
+            isButton = true;
+        }
 
         vibrateController();
     }
@@ -86,6 +111,12 @@ public class ControllerGrabObject : MonoBehaviour
         if (other.gameObject.CompareTag("Grabbable") || other.gameObject.CompareTag("Button"))
         {
             //highlightObject();
+        }
+
+        if (!isGrab && (other.gameObject.CompareTag("Button")))
+        {
+            //buttonCollider.SetActive(true);
+            isButton = true;
         }
     }
 
@@ -100,6 +131,12 @@ public class ControllerGrabObject : MonoBehaviour
         if (other.gameObject.CompareTag("Grabbable") || other.gameObject.CompareTag("Button"))
         {
             //unhighlightObject();
+        }
+
+        if (!isGrab && (other.gameObject.CompareTag("Button")))
+        {
+            buttonCollider.SetActive(false);
+            isButton = false;
         }
 
         collidingObject = null;
@@ -137,10 +174,39 @@ public class ControllerGrabObject : MonoBehaviour
     private void GrabObject()
     {
         //print("grabbing object...");
+        //print(collidingObject.name);
         isGrab = true;
         objectInHand = collidingObject;
         collidingObject = null;
-        objectInHand.transform.position = ItemPosition.transform.position;
+
+        /*
+        if ((left.getGrabStatus() && right.getGrabStatus()) && 
+            ((left.getObjName().Equals("Mixer") && right.getObjName().Equals("Top Cover Position")) ||
+            (right.getObjName().Equals("Mixer") && left.getObjName().Equals("Top Cover Position"))) &&
+            getObjName().Equals("Top Cover Position"))
+        {
+            print("REMOVE COVER");
+            mixerScript.removeCover();
+            objectInHand = mixerCover;
+        }*/
+        /*
+        if (left.getGrabStatus() && right.getGrabStatus()) {
+            print("both occupied");
+            print(getObjName());
+            if ((left.getObjName().Equals("Mixer") && right.getObjName().Equals("Top Cover Position")) ||
+            (right.getObjName().Equals("Mixer") && left.getObjName().Equals("Top Cover Position")))
+            {
+                print("Mixer and Cover held");
+                if (getObjName().Equals("Top Cover Position"))
+                {
+                    print("REMOVE COVER");
+                    mixerScript.removeCover();
+                    objectInHand = mixerCover;
+                }
+            }
+        }*/
+
+            objectInHand.transform.position = ItemPosition.transform.position;
 
         var joint = AddFixedJoint();
         joint.connectedBody = objectInHand.GetComponent<Rigidbody>();
@@ -175,6 +241,7 @@ public class ControllerGrabObject : MonoBehaviour
 
             if ((objectInHand.name.Equals("Mixer") || objectInHand.name.Equals("Top Cover")) && coverCollider.getStatus())
             {
+                print("COMBINE");
                 mixerScript.addCover();
             }
 
@@ -190,6 +257,11 @@ public class ControllerGrabObject : MonoBehaviour
             print("red button activated!");
             redButton.Activate();
         }
+    }
+
+    private void ContactButton()
+    {
+        //collidingObject.GetComponent<ButtonScript2>().updateButton();
     }
 
     /*
@@ -249,6 +321,41 @@ public class ControllerGrabObject : MonoBehaviour
     }
     */
 
+    private void ReturnItem()
+    {
+        if (gameObject.name.Contains("right"))
+        {
+            mixer.transform.position = ItemPosition.transform.position;
+            mixer.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            mixer.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            mixer.GetComponent<Rigidbody>().useGravity = false;
+        }
+        if (gameObject.name.Contains("left"))
+        {
+            mixerCover.transform.position = ItemPosition.transform.position;
+            mixerCover.GetComponent<Rigidbody>().velocity = Vector3.zero;
+            mixerCover.GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
+            mixerCover.GetComponent<Rigidbody>().useGravity = false;
+        }
+
+        isReturn = true;
+    }
+
+    private void ReturnDone()
+    {
+        print("returndone");
+        if (gameObject.name.Contains("right"))
+        {
+            mixer.GetComponent<Rigidbody>().useGravity = true;
+        }
+        if (gameObject.name.Contains("left"))
+        {
+            mixerCover.GetComponent<Rigidbody>().useGravity = true;
+        }
+
+        isReturn = false;
+    }
+
     void Start()
     {
         //bulletShader = GetComponent<Renderer>().material.shader;
@@ -280,8 +387,8 @@ public class ControllerGrabObject : MonoBehaviour
                     GrabObject();
                 } else if (collidingObject.gameObject.CompareTag("Button"))
                 {
-                    print("Button Tag Activated");
-                    ActivateButton();
+                    //print("Button Tag Activated");
+                    //ActivateButton();
                 }
                 
             }
@@ -295,6 +402,19 @@ public class ControllerGrabObject : MonoBehaviour
             }
         }
 
+        if (!isGrab && returnAction.GetLastStateDown(handType))
+        {
+            if (!isReturn)
+            {
+                ReturnItem();
+            }
+        } else if (returnAction.GetLastStateUp(handType))
+        {
+            ReturnDone();
+        }
+
+
+
         if (isGrab)
         {
             /*
@@ -307,6 +427,11 @@ public class ControllerGrabObject : MonoBehaviour
                 ShootObject();
             }
             */
+        }
+
+        if (isButton)
+        {
+            ContactButton();
         }
 
     }
