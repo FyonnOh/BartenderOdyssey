@@ -6,16 +6,16 @@ tags:
 <<pointingAction Jameson>>
 Jameson: Hey you! Whiskey on the rocks.
 <<wait 1>>
-Jameson: You know the sight of the likes of you really disgust me...
+Jameson: You know, the sight of the likes of you really disgust me...
 <<annoyedAction Jameson>>
 <<wait 1>>
-Jameson: You think you're better than us don't you? You think that you can just come and do whatever you want and we would be fine with it. 
+Jameson: You think you're better than us, don't you? You think that you can just come and do whatever you want and we would be fine with it. 
 <<dismissiveAction Jameson>>
 Jameson: But I know what you all are thinking... 
 <<annoyedAction Jameson>>
 <<wait 1>>
-Jameson: I know what you guys are dying to do. You want to ripe us apart and take everything we have. You want to destroy us.
-Jameson: But listen up you piece of trash! 
+Jameson: I know what you guys are dying to do. You want to rip us apart and take everything we have. You want to destroy us.
+Jameson: But listen up, you piece of trash! 
 <<pointingAction Jameson>>
 Jameson: You are nothing to me. You don't scare me. I swear over my dead body, that I will never ever bow down to you... 
 <<dismissiveAction Jameson>>
@@ -24,17 +24,17 @@ Jameson: Things like you should not exist. Your existence is an abomination!
 <<walkToPlayer BarOwner>>
 <<waitForMove_BarOwner BarOwner>>
 <<talkingAction BarOwner>>
-BarOwner: I am sorry but I would have to ask you to leave. 
+BarOwner: I am sorry, but I will have to ask you to leave. 
 BarOwner: Your behaviour is affecting the other customers.
 <<wait 1>>
 <<dismissiveAction Jameson>>
-Jameson: Fine by me, I cant stand breathing next to that even for a minute.
+Jameson: Fine by me. I can't stand breathing next to that for even a minute.
 <<wait 1>>
 <<walkToEntrance Jameson>> 
 <<wait 1>>
 <<talkingAction BarOwner>>
-BarOwner: Don't worry about him Deckard. He is drunk out of his mind. 
-BarOwner: Pay no mind to what he said and focus on your job alright?
+BarOwner: Don't worry about him, Deckard. He is drunk out of his mind. 
+BarOwner: Pay no mind to what he said and just focus on your job, alright?
 <<walkToEntrance BarOwner>>
 <<loadNextLevel Jameson>>
 ===
