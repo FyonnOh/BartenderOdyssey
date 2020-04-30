@@ -1,0 +1,26 @@
+title: Scene8
+tags: 
+---
+<<runIn BarOwner>>
+<<waitForRun BarOwner>>
+<<wait 2>>
+<<breakUpFight BarOwner>>
+BarOwner: Hey! Stop this instance before I call the police!
+<<wait 1>>
+<<runToEntrance Customer1>>
+<<rotate_Customer1 Customer1>>
+<<wait 2>>
+<<standUp Jameson>>
+BarOwner: Deckard! What were you doing?!
+BarOwner: This poor guy was beaten up right in front of you, and yet you didn't do anything?!
+BarOwner: You could have shouted for help or something!
+BarOwner: To think that you could stand there and watch as this poor man gets beaten up. 
+BarOwner: Don't you feel anything?!
+<<shakeHead BarOwner>>
+BarOwner: I think I might have put too much faith in you.
+BarOwner: How naive was I to believe that what they say about you is wrong.
+BarOwner: I was hoping you could prove them wrong.
+BarOwner: But look how the tables have changed. You proved me wrong instead.
+<<leave BarOwner>>
+<<fadeEnding RedPanel>>
+===
