@@ -1,0 +1,17 @@
+title: Customer1
+tags: 
+---
+Customer1: Hey! 
+<<wait 1>>
+Customer1: One Bloody Mary.
+<<wait 1>>
+<<doAngryGesture Customer2>>
+Customer2: And Martini for me. Make it quick.
+<<wait 1>>
+Customer1: Hey!
+<<doPointingGesture Customer1>>
+Customer1:  I don't have all day to be waiting for you to finish. 
+<<doIdle Customer1>>
+Customer1: You better hurry and finish before my patience runs out.
+<<loadNextLevel Customer1>>
+===

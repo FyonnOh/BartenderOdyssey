@@ -1,0 +1,35 @@
+title: Scene6
+tags: 
+---
+<<walkToPlayer Jameson>>
+<<waitForMove Jameson>>
+<<headShakeAction Jameson>>
+Jameson: I need another drink.
+<<walkToPlayer Customer1>>
+<<waitForMove_Customer1 Customer1>>
+<<argueAction Customer1>>
+Customer1: Hey You!
+<<turnAround Jameson>>
+<<rotate Jameson>>
+<<wait 1>>
+<<pointingAction Jameson>>
+<<wait 1>>
+<<annoyedAction Jameson>>
+<<wait 1>>
+<<dismissiveAction Jameson>>
+<<wait 1>>
+<<annoyedAction Jameson>>
+<<wait 2>>
+<<pointingAction Jameson>>
+<<punch1 Customer1>>
+<<receivePunch1 Jameson>>
+<<wait 2>>
+<<punch2 Customer1>>
+<<receivePunch2 Jameson>>
+<<wait 2>>
+<<punch3 Customer1>>
+<<rotate_Customer1 Customer1>>
+<<receivePunch3 Jameson>>
+<<wait 2>>
+<<loadNextLevel Jameson>>
+===

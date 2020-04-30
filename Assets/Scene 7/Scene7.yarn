@@ -1,0 +1,24 @@
+title: Scene7
+tags: 
+---
+Customer1: Ouch!
+<<wait 1>>
+<<runToEntrance Customer1>>
+<<rotate_Customer1 Customer1>>
+<<wait 2>>
+<<StandsUp Jameson>>
+<<wait 4>>
+<<walkToPlayer Jameson>>
+<<rotateTowards Jameson>>
+<<wait 1>>
+Jameson: Thank you...
+Jameson: Thank you for helping me.
+Jameson: You know... you surprise me. 
+<<defeatedAction Jameson>>
+Jameson: I would never have though you would defend me. Especially after the way I treated you just now. 
+Jameson: I think I might have severely misjudged you. 
+Jameson: Seems like there some human in you.
+<<wait 1>>
+<<HandShake Jameson>>
+Jameson: I am Jameson. What about you? 
+===
