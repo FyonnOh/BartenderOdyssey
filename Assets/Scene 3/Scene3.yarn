@@ -5,14 +5,9 @@ tags:
 <<walkToPlayer Jameson>>
 <<waitForMove Jameson>>
 <<pointingAction Jameson>>
-Jameson: Hey you! Whiskey on the rocks.
-<<<<<<< HEAD
+Jameson: Hey you! Blazing Sunset. Now.
 <<waitForDrinksServed Jameson>>
-Jameson: You know, the sight of the likes of you really disgust me...
-=======
-<<wait 1>>
 Jameson: You know, the sight of the likes of you really disgusts me...
->>>>>>> d3c8fc38e727a08448557a1a58acd7ae58a8e9cb
 <<annoyedAction Jameson>>
 <<wait 1>>
 Jameson: You think you're better than us, don't you? You think that you can just come and do whatever you want and we would be fine with it. 
