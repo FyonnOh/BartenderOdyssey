@@ -107,7 +107,7 @@ public class AudioManager : MonoBehaviour
         if (float.TryParse(parameters[1], out float fade))
             StartCoroutine(DoAudioFadeOutYarn(bgmSource, fade, onComplete));
         else
-            Debug.LogError($"Invalid fade time {parameter}");
+            Debug.LogError($"Invalid fade time {parameters[1]}");
     }
 
     public void AudioFadeOut(AudioSource audio, float fade)
@@ -132,7 +132,7 @@ public class AudioManager : MonoBehaviour
 
     private IEnumerator DoAudioFadeOutYarn(AudioSource audio, float fade, System.Action onComplete)
     {
-        StartCoroutine(DoAudioFadeOut(audio, fade));
+        yield return StartCoroutine(DoAudioFadeOut(audio, fade));
         onComplete();
     }
 
