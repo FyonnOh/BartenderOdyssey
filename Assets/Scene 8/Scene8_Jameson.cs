@@ -6,7 +6,7 @@ namespace Yarn.Unity.BartenderOdyssey
 {
     public class Scene8_Jameson : MonoBehaviour
     {
-        public GameObject waypoint_Entrance;
+        public GameObject entrance;
         public GameObject waypoint_InFrontOfPlayer;
         public UnityEngine.AI.NavMeshAgent agent;
         public float rotationSpeed = 3.0f;
@@ -33,6 +33,14 @@ namespace Yarn.Unity.BartenderOdyssey
         [YarnCommand("standUp")]
         public void StandUp() {
             anim.SetTrigger("StandUp");
+        }
+
+        [YarnCommand("injuredWalkLeave")]
+        public void InjuredWalkLeave()
+        {
+            anim.SetTrigger("InjuredWalk");
+            agent.SetDestination(entrance.transform.position);
+
         }
 
         public void TurnLeftTowardsPlayer(string[] parameters, System.Action onComplete) {

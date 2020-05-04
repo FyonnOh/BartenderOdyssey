@@ -35,17 +35,18 @@ BarOwner: I think I might have put too much faith in you.
 BarOwner: How naive I was to believe that what they say about you is wrong.
 BarOwner: I was hoping you could prove them wrong.
 <<shakeHead BarOwner>>
-BarOwner: But look how the tables have changed. You proved me wrong instead.
+BarOwner: But look how the tables have turned. You proved me wrong instead.
 <<sigh BarOwner>>
 BarOwner: I think it's time I get a Human Bartender...
 <<leave BarOwner>>
-<<stumbleLeave Jameson>>
 <<wait 2>>
+<<injuredWalkLeave Jameson>>
+<<wait 4>>
 <<flashRed RedPanel>>
 <<wait 4>>
 <<shutdown RedPanel>>
 <<wait 3>>
 <<showEndScreen RedPanel>>
-<<wait 6>>
+<<wait 10>>
 BarOwner: 
 ===

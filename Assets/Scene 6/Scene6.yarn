@@ -1,26 +1,32 @@
 title: Scene6
 tags: 
 ---
+<<walkToPlayer Customer1>>
+<<waitForMove_Customer1 Customer1>>
+<<rotate_Customer1 Customer1>>
+Customer1: Whiskey.
 <<walkToPlayer Jameson>>
 <<waitForMove Jameson>>
 <<headShakeAction Jameson>>
 Jameson: I need another drink.
-<<walkToPlayer Customer1>>
-<<waitForMove_Customer1 Customer1>>
+<<rotateLeft>>
 <<argueAction Customer1>>
-Customer1: Hey You!
+Customer1: Hey! Can’t you see I was here first?
 <<turnAround Jameson>>
 <<rotate Jameson>>
 <<wait 1>>
 <<pointingAction Jameson>>
-<<wait 1>>
+Jameson: Do I look like I care?
+Customer1: How dare you talk to me like that?
 <<annoyedAction Jameson>>
 <<wait 1>>
+Customer1: Don’t you know who I am?!
 <<dismissiveAction Jameson>>
 <<wait 1>>
 <<annoyedAction Jameson>>
 <<wait 2>>
 <<pointingAction Jameson>>
+Customer1: You’re really asking for a fight.
 <<punch1 Customer1>>
 <<receivePunch1 Jameson>>
 <<wait 2>>
@@ -31,5 +37,5 @@ Customer1: Hey You!
 <<rotate_Customer1 Customer1>>
 <<receivePunch3 Jameson>>
 <<wait 2>>
-<<loadNextLevel Jameson>>
+<<loadScene LevelLoader 6>>
 ===
