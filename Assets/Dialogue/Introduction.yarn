@@ -10,11 +10,13 @@ Intro: Androids are essentially synthetic beings designed to think and work like
 <<wait 0.5>>
 <<newline IntroPanel 2>>
 Intro: In this story, you will experience this world through the eyes of a bartender.
-<<wait 0.2>>
+<<wait 0.5>>
 Intro: The choices you make will affect which ending you'll get.
 <<wait 1>>
 <<newline IntroPanel 2>>
 Intro: Welcome to bar Nexus.
+<<markIntroEnd IntroPanel>>
 <<wait 2>>
 <<loadNextLevel IntroPanel>>
+Intro: 
 ===

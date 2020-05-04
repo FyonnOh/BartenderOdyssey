@@ -25,9 +25,6 @@ public class AudioManager : MonoBehaviour
 
     void Start()
     {
-        // DialogueRunner dialogueRunner = FindObjectOfType<dialogueRunner>();
-        // dialogueRunner.AddCommandHandler("")
-
         audioSource = this.GetComponent<AudioSource>();
         StillSpeaking = false;
     }

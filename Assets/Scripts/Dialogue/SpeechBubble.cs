@@ -15,6 +15,7 @@ namespace Yarn.Unity.BartenderOdyssey
         
         public Text sizerText;
         public Image background;
+        // public Camera cameraToLookAt;
         private List<AudioClip> clips;
 
         void Awake()
@@ -35,6 +36,11 @@ namespace Yarn.Unity.BartenderOdyssey
         void Start()
         {
             // SetSpeechStyle(SoundEffectType.Talking);
+        }
+
+        void Update()
+        {
+            LookAtCamera();
         }
 
         public virtual void OnDialogueStart()
@@ -126,6 +132,16 @@ namespace Yarn.Unity.BartenderOdyssey
         protected virtual void ShowOptions(bool show) 
         {
             // nextButton.gameObject.SetActive(show);
+        }
+
+        private void LookAtCamera()
+        {
+            Camera cameraToLookAt = Camera.main;
+            Vector3 v = cameraToLookAt.transform.position - transform.position;
+            v.x = v.z = 0f;
+
+            transform.LookAt(cameraToLookAt.transform.position - v);
+            transform.Rotate(0, 180, 0);
         }
 
         [YarnCommand("setSpeechStyle")]

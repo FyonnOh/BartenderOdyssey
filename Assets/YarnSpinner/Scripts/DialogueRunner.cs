@@ -133,6 +133,11 @@ namespace Yarn.Unity
                     // special case.) Wait is defined here in Unity.
                     AddCommandHandler("wait", HandleWaitCommand);
 
+                    // BartenderOdyssey defines another built-in command:
+                    // "runNextLinesTogether". This command is used to run
+                    // multiple lines in a seemingly parallel fashion.
+                    AddCommandHandler("runNextLinesTogether", HandleRunNextLinesTogetherCommand);
+
                     foreach (var yarnScript in yarnScripts) {
                         AddStringTable(yarnScript);
                     }
@@ -145,6 +150,18 @@ namespace Yarn.Unity
                 return _dialogue;
             }
         }
+
+        // Used to support running multiple lines together.
+        // The Dialogue is told to continue until the number
+        // of desired concurrent instructions is run.
+        int numInstructions = 0;
+        int requiredInstructions = 1; // at least one instruction is always needed
+
+        // A flag to indicate if "runNextLinesTogether" was called.
+        // This variable is set to false before handling a command.
+        // If true, do not include the command in the concurrent
+        // instructions count.
+        bool wasCommandRunNextLinesTogether = false;
 
         private void HandleWaitCommand(string[] parameters, System.Action onComplete)
         {
@@ -174,6 +191,26 @@ namespace Yarn.Unity
             onComplete();
         }
 
+        private void HandleRunNextLinesTogetherCommand(string[] parameters)
+        {
+            wasCommandRunNextLinesTogether = true;
+
+            if (parameters.Length != 1)
+            {
+                Debug.LogErrorFormat("<<runNextLinesTogether>> command expects one parameter");
+                return;
+            }
+
+            string desiredString = parameters[0];
+            if (!Int32.TryParse(desiredString, out int desired))
+            {
+                Debug.LogErrorFormat($"<<runNextLinesTogether>> command failed to parse {desiredString} as an integer");
+                return;
+            }
+
+            requiredInstructions = desired;
+        }
+
         private void HandleDialogueComplete()
         {
             isDialogueRunning = false;
@@ -198,6 +235,10 @@ namespace Yarn.Unity
             // immediately called _continue
             wasCompleteCalled = false;
 
+            // Set a flag that we can use to indicate when the command
+            // "runNextLinesTogether" was invoked.
+            wasCommandRunNextLinesTogether = false;
+
             (wasValidCommand, executionType) = DispatchCommandToRegisteredHandlers(command, _continue);   
 
             if (wasValidCommand) {
@@ -211,7 +252,9 @@ namespace Yarn.Unity
                 } else {
                     // Either continue execution, or pause (in which case
                     // _continue will be called)
-                    return executionType;
+                    // BartenderOdyssey add-on: tell Dialogue to continue
+                    // if we need to run more concurrent instructions
+                    return HandleConcurrentInstructions(executionType);
                 }
                 
             }
@@ -286,7 +329,35 @@ namespace Yarn.Unity
         /// Forward the line to the dialogue UI.
         private Dialogue.HandlerExecutionType HandleLine(Line line)
         {
-            return this.dialogueUI.RunLine (line, strings, _continue);            
+            wasCommandRunNextLinesTogether = false;
+            // strings.TryGetValue(line.ID, out var text);
+            // Debug.Log($"Handle line: {text}");
+            Dialogue.HandlerExecutionType executionType = this.dialogueUI.RunLine(line, strings, _continue);
+            return HandleConcurrentInstructions(executionType);
+        }
+
+        private Dialogue.HandlerExecutionType HandleConcurrentInstructions(Dialogue.HandlerExecutionType originalExecutionType)
+        {
+            if (!wasCommandRunNextLinesTogether)
+            {
+                numInstructions++;
+            }
+            // Debug.Log($"numInstructions: {numInstructions}; requiredInstructions: {requiredInstructions}");
+            // Tell Dialogue to continue if we haven't reached
+            // our desired number of concurrent instructions
+            if (numInstructions < requiredInstructions)
+            {
+                // Debug.Log("Returning ContinueExection");
+                return Dialogue.HandlerExecutionType.ContinueExecution;
+            }
+            
+            // Debug.Log("Returning original execution");
+
+            // Reached desired number of concurrent instructions.
+            // Reset to default of running one instruction at a time.
+            numInstructions = 0;
+            requiredInstructions = 1;
+            return originalExecutionType;
         }
 
         /// Adds a command handler. Yarn Spinner will continue execution after this handler is called.
@@ -431,7 +502,7 @@ namespace Yarn.Unity
         private void ContinueDialogue()
         {
             wasCompleteCalled = true;
-            this.dialogue.Continue();           
+            this.dialogue.Continue();
         }
 
         void RunDialogue (string startNode = "Start")
