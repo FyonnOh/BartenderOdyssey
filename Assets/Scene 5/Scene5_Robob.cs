@@ -23,10 +23,13 @@ namespace Yarn.Unity.BartenderOdyssey {
         private bool isWalking = false;
         private bool hasStarted = false;
 
+        private bool isDrinksServed = false;
+
         void Awake()
         {
             DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
             dialogueRunner.AddCommandHandler("waitForMove", WaitForMove);
+            dialogueRunner.AddCommandHandler("waitForDrinksServed", WaitForDrinksServed);
         }
 
         void Start()
@@ -110,6 +113,29 @@ namespace Yarn.Unity.BartenderOdyssey {
 
                 yield return null;
             }
+            onComplete();
+        }
+
+        public void drinksIsServed()
+        {
+            isDrinksServed = true;
+        }
+
+        public void WaitForDrinksServed(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForDrinks(onComplete));
+        }
+
+        private IEnumerator DoWaitForDrinks(System.Action onComplete)
+        {
+            isDrinksServed = false;
+            print(isDrinksServed);
+            while (!isDrinksServed)
+            {
+                print(isDrinksServed);
+                yield return null;    
+            }
+
             onComplete();
         }
 
