@@ -4,7 +4,8 @@ tags:
 <<wait 0.5>>
 <<fadeInTitle transitionPanel 2.5>>
 <<wait 1>>
-transition: Today was a rollercoaster ride for Deckard. Deckard could not comprehend why he was targeted, not once, but twice already. 
+transition: Today was a rollercoaster ride for Deckard.
+transition: Deckard could not comprehend why he was targeted, not once, but twice already.
 <<wait 2>>
 transition: There must be something about him that people did not like.
 <<wait 2>>
@@ -20,5 +21,6 @@ transition: These thoughts kept running through Deckard’s head. Until one day.
 <<markIntroEnd transitionPanel>>
 <<wait 3>>
 <<loadNextLevel transitionPanel>>
+transition: 
 ===
 

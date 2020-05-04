@@ -4,12 +4,13 @@ tags:
 <<wait 0.5>>
 <<fadeInTitle transitionPanel 2.5>>
 <<wait 1>>
-transition: It was unfortunate that Deckard had to encounter such rude customers during his first day of work.
+transition: It was unfortunate that Deckard had to encounter such rude customers on his first day of work.
 <<wait 1>>
-transition: He wonders as to why he was being treated like that. Did he do something wrong?
+transition: He wonders as to why he was being treated like that.
+transition: Did he do something wrong?
 <<wait 2>>
 <<newline transitionPanel 2>>
-transition: Deckard brushes it aside and continues his work, maybe he was just unlucky on his first day.
+transition: Deckard brushes it aside and continues his work--maybe he was just unlucky on his first day.
 <<wait 1>>
 transition: However, little did he know, things would just get worse from there.
 <<wait 2>>
@@ -18,4 +19,5 @@ transition: It's time for day 2.
 <<markIntroEnd transitionPanel>>
 <<wait 3>>
 <<loadNextLevel transitionPanel>>
+transition: 
 ===

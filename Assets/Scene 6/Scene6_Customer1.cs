@@ -120,7 +120,7 @@ namespace Yarn.Unity.BartenderOdyssey {
             isHit = true;
             anim.SetTrigger("Hit");
             yield return new WaitForSeconds(2);
-            sceneLoader.LoadScene("5"); // scene index for Scene 7
+            sceneLoader.LoadScene("8"); // scene index for Scene 7
         }
 
         public void WaitForHit_Customer1(string[] parameters, System.Action onComplete)
