@@ -1,12 +1,12 @@
 title: Scene7
 tags: 
 ---
-<<playBgm AudioManager Happy>>
 Customer1: Ouch!
 <<wait 1>>
 <<runToEntrance Customer1>>
 <<rotate_Customer1 Customer1>>
 <<wait 2>>
+<<playBgm AudioManager Happy>>
 <<StandsUp Jameson>>
 <<wait 4>>
 <<walkToPlayer Jameson>>

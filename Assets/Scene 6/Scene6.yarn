@@ -1,6 +1,7 @@
 title: Scene6
 tags: 
 ---
+<<playBgm AudioManager Sad>>
 <<walkToPlayer Customer1>>
 <<waitForMove_Customer1 Customer1>>
 <<rotate_Customer1 Customer1>>
