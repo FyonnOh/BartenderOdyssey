@@ -14,9 +14,10 @@ Jameson: You think you're better than us, don't you? You think that you can just
 Jameson: But I know what you all are thinking... 
 <<annoyedAction Jameson>>
 <<wait 1>>
-Jameson: I know what you guys are dying to do. You want to rip us apart and take everything we have. You want to destroy us.
-Jameson: But listen up, you piece of trash! 
+Jameson: I know what you guys are dying to do. 
+Jameson: You want to rip us apart and take everything we have. You want to destroy us.
 <<pointingAction Jameson>>
+Jameson: But listen up, you piece of trash! 
 Jameson: You are nothing to me. You don't scare me. I swear over my dead body, that I will never ever bow down to you... 
 <<dismissiveAction Jameson>>
 Jameson: Things like you should not exist. Your existence is an abomination!
