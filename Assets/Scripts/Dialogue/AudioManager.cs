@@ -21,6 +21,9 @@ public class AudioManager : MonoBehaviour
         {
             instance = this;
         }
+
+        DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
+        dialogueRunner.AddCommandHandler("fadeOutBgm", FadeOutBgm);
     }
 
     void Start()
@@ -99,10 +102,10 @@ public class AudioManager : MonoBehaviour
     }
 
     [YarnCommand("fadeOutBgm")]
-    public void FadeOutBgm(string parameter)
+    public void FadeOutBgm(string[] parameters, System.Action onComplete)
     {
-        if (float.TryParse(parameter, out float fade))
-            StartCoroutine(DoAudioFadeOut(bgmSource, fade));
+        if (float.TryParse(parameters[1], out float fade))
+            StartCoroutine(DoAudioFadeOutYarn(bgmSource, fade, onComplete));
         else
             Debug.LogError($"Invalid fade time {parameter}");
     }
@@ -125,6 +128,12 @@ public class AudioManager : MonoBehaviour
         audio.Stop();
         audio.volume = startVolume;
         audio.loop = false;
+    }
+
+    private IEnumerator DoAudioFadeOutYarn(AudioSource audio, float fade, System.Action onComplete)
+    {
+        StartCoroutine(DoAudioFadeOut(audio, fade));
+        onComplete();
     }
 
     // private IEnumerator DoAudioFadeOut(AudioSource audio, float fade, System.Action onComplete)
