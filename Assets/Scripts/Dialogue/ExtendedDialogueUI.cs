@@ -312,7 +312,7 @@ namespace Yarn.Unity
             float delay = 0f;
 
             // Check for attribute
-            if (line[0] == '{')
+            if (!string.IsNullOrWhiteSpace(line) && !string.IsNullOrEmpty(line) && line[0] == '{')
             {
                 if (line.IndexOf('}') > 0)
                 {
