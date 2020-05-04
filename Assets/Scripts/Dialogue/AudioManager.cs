@@ -66,7 +66,8 @@ public class AudioManager : MonoBehaviour
         {
             bgmSource.Stop();
             bgmSource.clip = clip;
-            bgmSource.volume = 0.2f;
+            bgmSource.loop = true;
+            bgmSource.volume = 0.025f;
             bgmSource.Play();
         }
     }
@@ -123,6 +124,7 @@ public class AudioManager : MonoBehaviour
 
         audio.Stop();
         audio.volume = startVolume;
+        audio.loop = false;
     }
 
     // private IEnumerator DoAudioFadeOut(AudioSource audio, float fade, System.Action onComplete)
