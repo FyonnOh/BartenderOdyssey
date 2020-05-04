@@ -12,7 +12,7 @@ namespace Yarn.Unity.BartenderOdyssey
         public GameObject entrance;
         public NavMeshAgent agent;
         public Animator anim;
-        public GameObject player;
+        // public GameObject player;
         public float rotationSpeed = 0.5f;
         public float meleeRange = 0.5f;
         private bool hasStarted = false;
@@ -180,15 +180,14 @@ namespace Yarn.Unity.BartenderOdyssey
         private IEnumerator DoTurnRightTowardsPlayer(float duration, System.Action onComplete)
         {
             Quaternion oldRotation = transform.rotation;
-            Vector3 direction =  player.transform.position - transform.position;
+            // Vector3 direction =  player.transform.position - transform.position;
             // Debug.Log($"Player position: {player.transform.position}; BarOwner position: {transform.position}");
             // Debug.Log($"Direction vector: {direction}");
-            direction.x = direction.z = 0f;
+            // direction.x = direction.z = 0f;
             // direction.Normalize();
 
             Quaternion towards = Quaternion.Euler(transform.eulerAngles + (Vector3.up * 60));
-
-            Vector3 originalForward = transform.forward;
+            // Vector3 originalForward = transform.forward;
 
             for (float t = 0f; t < duration; t += Time.deltaTime)
             {

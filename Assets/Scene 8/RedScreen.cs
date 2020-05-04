@@ -11,6 +11,7 @@ public class RedScreen : MonoBehaviour
     public Image warningImage;
     public Sprite warningSprite;
     public Text messageText;
+    public GameObject buttonGroup;
     private bool isFlashOn;
     private bool keepFlashing;
 
@@ -21,6 +22,7 @@ public class RedScreen : MonoBehaviour
         messageText.canvasRenderer.SetAlpha(0.0f);
         warningImage.canvasRenderer.SetAlpha(0.0f);
         warningImage.gameObject.SetActive(false);
+        buttonGroup.SetActive(false);
 
         // DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
         // if (dialogueRunner != null)
@@ -137,6 +139,9 @@ public class RedScreen : MonoBehaviour
         yield return new WaitForSeconds(delay);
         messageText.text = "You have reached the bad ending.\nWould you like to replay?";
         messageText.CrossFadeAlpha(1.0f, delay, true);
+
+        yield return new WaitForSeconds(delay+1);
+        buttonGroup.SetActive(true);
     }
 }
 

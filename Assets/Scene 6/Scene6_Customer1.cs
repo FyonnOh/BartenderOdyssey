@@ -22,7 +22,7 @@ namespace Yarn.Unity.BartenderOdyssey {
             DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
             dialogueRunner.AddCommandHandler("waitForMove_Customer1", WaitForMove_Customer1);
             dialogueRunner.AddCommandHandler("rotate_Customer1", Rotate_Customer1);
-
+            dialogueRunner.AddCommandHandler("rotateLeft", RotateLeft);
             dialogueRunner.AddCommandHandler("waitForHit_Customer1", WaitForHit_Customer1);
         }
         void Start()
@@ -79,10 +79,13 @@ namespace Yarn.Unity.BartenderOdyssey {
 
                 yield return null;
             }
-
+            anim.SetTrigger("Idle");
             onComplete();
         }
 
+        public void RotateLeft(string[] parameters, System.Action onComplete) {
+            StartCoroutine(RotateMe(Vector3.up * -90, 0.8f, onComplete));
+        }
         public void Rotate_Customer1(string[] parameters, System.Action onComplete) {
             StartCoroutine(RotateMe(Vector3.up * 90, 0.8f, onComplete));
         }
