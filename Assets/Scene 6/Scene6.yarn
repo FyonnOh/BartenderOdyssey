@@ -29,6 +29,19 @@ Customer1: Don’t you know who I am?!
 <<wait 2>>
 <<pointingAction Jameson>>
 Customer1: You’re really asking for a fight.
+<<startWaitingForCupThrow Customer1>>
+<<punch1 Customer1>>
+<<receivePunch1 Jameson>>
+<<wait 2>>
+<<punch2 Customer1>>
+<<receivePunch2 Jameson>>
+<<wait 2>>
+<<punch1 Customer1>>
+<<receivePunch1 Jameson>>
+<<wait 2>>
+<<punch2 Customer1>>
+<<receivePunch2 Jameson>>
+<<wait 2>>
 <<punch1 Customer1>>
 <<receivePunch1 Jameson>>
 <<wait 2>>

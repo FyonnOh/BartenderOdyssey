@@ -28,7 +28,16 @@ public class SceneLoader : MonoBehaviour
         }
         else
         {
-            Debug.LogErrorFormat($"Cannot parse {parameter} as an integer scene index to load");
+            Debug.LogErrorFormat($"Cannot parse {parameter} as an integer scene index to load. Trying to parse as scene name instead.");
+            Scene sceneToLoad = SceneManager.GetSceneByPath(parameter);
+            if (sceneToLoad.IsValid())
+            {
+                StartCoroutine(DoLoadScene(sceneToLoad.buildIndex));
+            }
+            else
+            {
+                Debug.LogErrorFormat($"Failed to parse {parameter} as a valid scene name.");
+            }
         }
     }
 

@@ -12,10 +12,14 @@ namespace Yarn.Unity.BartenderOdyssey {
         public GameObject waypoint_InFrontOfPlayer_2;
         public GameObject waypoint_InFrontOfPlayer_3;
         public NavMeshAgent agent;
-
         public Animator anim;
-
+        public SceneLoader sceneLoader;
         private bool isHit = false;
+        private bool _waitingForCupThrow = false;
+        public bool IsWaitingForCupThrow 
+        { 
+            get { return _waitingForCupThrow; } 
+        }
 
         void Awake()
         {
@@ -100,9 +104,23 @@ namespace Yarn.Unity.BartenderOdyssey {
             onComplete();
         }
 
-        public void getHit()
+        [YarnCommand("startWaitingForCupThrow")]
+        public void StartWaitingForCupThrow()
+        {
+            _waitingForCupThrow = true;
+        }
+
+        public void GetHit()
+        {
+            StartCoroutine(DoGetHit());
+        }
+
+        private IEnumerator DoGetHit()
         {
             isHit = true;
+            anim.SetTrigger("Hit");
+            yield return new WaitForSeconds(2);
+            sceneLoader.LoadScene("5"); // scene index for Scene 7
         }
 
         public void WaitForHit_Customer1(string[] parameters, System.Action onComplete)

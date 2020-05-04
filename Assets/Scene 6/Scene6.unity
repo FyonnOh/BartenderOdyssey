@@ -408,6 +408,7 @@ MonoBehaviour:
   waypoint_InFrontOfPlayer_3: {fileID: 408900534}
   agent: {fileID: 80621864}
   anim: {fileID: 80621863}
+  sceneLoader: {fileID: 261521168}
 --- !u!54 &80621866
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -811,6 +812,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 241931247}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &261521168 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2540699683258628867, guid: 7b9c74f893aae4848bb651f0a6304ab3,
+    type: 3}
+  m_PrefabInstance: {fileID: 5160792476720464179}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e094255e305ad7a4a9cb4c87d82a0e85, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &265068860
 GameObject:
   m_ObjectHideFlags: 0
@@ -3541,6 +3554,7 @@ GameObject:
   - component: {fileID: 1281391763}
   - component: {fileID: 1281391762}
   - component: {fileID: 1281391761}
+  - component: {fileID: 1281391764}
   m_Layer: 0
   m_Name: CollisionDetector
   m_TagString: Untagged
@@ -3622,6 +3636,19 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1281391759}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &1281391764
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1281391759}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e55f6863e3409354e84c737edce35518, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  customer1: {fileID: 80621860}
 --- !u!1 &1299971564
 GameObject:
   m_ObjectHideFlags: 0
@@ -4271,7 +4298,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &1469911807
 Transform:
   m_ObjectHideFlags: 0
