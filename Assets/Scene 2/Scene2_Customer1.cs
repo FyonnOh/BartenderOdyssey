@@ -12,10 +12,17 @@ namespace Yarn.Unity.BartenderOdyssey {
         float bounce = 0.0f;
         float threshold = 0.1f;
 
+        private bool isDrink1Served = false;
+        private bool isDrink2Served = false;
+        private bool isMixTriggered = false;
+
         private bool hasStarted = false;
         void Awake()
         {
             DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
+
+            dialogueRunner.AddCommandHandler("waitForMixingTrigger", WaitForMixingTrigger);
+            dialogueRunner.AddCommandHandler("waitForDrinksServed", WaitForDrinksServed);
         }
         void Start()
         {
@@ -49,6 +56,55 @@ namespace Yarn.Unity.BartenderOdyssey {
                 FindObjectOfType<DialogueRunner>().StartDialogue(this.gameObject.GetComponent<NPC>().talkToNode);
             }
         }
+
+        public void drink1IsServed()
+        {
+            isDrink1Served = true;
+        }
+
+        public void drink2IsServed()
+        {
+            isDrink2Served = true;
+        }
+
+        public void WaitForDrinksServed(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForDrinks(onComplete));
+        }
+
+        private IEnumerator DoWaitForDrinks(System.Action onComplete)
+        {
+            isDrink1Served = false;
+            isDrink2Served = false;
+            while (!(isDrink1Served && isDrink2Served))
+            {
+                yield return null;
+            }
+
+            onComplete();
+        }
+        public void mixTriggered()
+        {
+            isMixTriggered = true;
+        }
+
+        public void WaitForMixingTrigger(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForTrigger(onComplete));
+        }
+
+        private IEnumerator DoWaitForTrigger(System.Action onComplete)
+        {
+            isMixTriggered = false;
+            while (!isMixTriggered)
+            {
+                yield return null;
+            }
+
+            onComplete();
+        }
+
+
 
         [YarnCommand("doPointingGesture")]
         public void doPointingGesture() {

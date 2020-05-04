@@ -7,6 +7,8 @@ tags:
 Customer1: Whiskey.
 <<walkToPlayer Jameson>>
 <<waitForMove Jameson>>
+<<walkToPlayer Jameson>>
+<<waitForMove Jameson>>
 <<headShakeAction Jameson>>
 Jameson: I need another drink.
 <<rotateLeft>>
