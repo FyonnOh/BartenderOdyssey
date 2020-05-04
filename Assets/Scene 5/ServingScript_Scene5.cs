@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity.BartenderOdyssey;
 
-public class ServingScript_Scene1 : MonoBehaviour
+public class ServingScript_Scene5 : MonoBehaviour
 {
     private bool isServed = false;
     private Color ogColor;
@@ -44,7 +44,7 @@ public class ServingScript_Scene1 : MonoBehaviour
     private void success()
     {
         coaster.GetComponent<Renderer>().material.color = Color.green;
-        barOwner.GetComponent<Scene1_BarOwner_WayPointControl>().drinksIsServed();
+        barOwner.GetComponent<Scene5_Robob>().drinksIsServed();
     }
 
     private void failure()

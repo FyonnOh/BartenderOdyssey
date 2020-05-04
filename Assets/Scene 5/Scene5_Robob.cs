@@ -23,19 +23,13 @@ namespace Yarn.Unity.BartenderOdyssey {
         private bool isWalking = false;
         private bool hasStarted = false;
 
-<<<<<<< HEAD
-=======
         private bool isDrinksServed = false;
 
->>>>>>> d3c8fc38e727a08448557a1a58acd7ae58a8e9cb
         void Awake()
         {
             DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
             dialogueRunner.AddCommandHandler("waitForMove", WaitForMove);
-<<<<<<< HEAD
-=======
             dialogueRunner.AddCommandHandler("waitForDrinksServed", WaitForDrinksServed);
->>>>>>> d3c8fc38e727a08448557a1a58acd7ae58a8e9cb
         }
 
         void Start()
@@ -122,8 +116,6 @@ namespace Yarn.Unity.BartenderOdyssey {
             onComplete();
         }
 
-<<<<<<< HEAD
-=======
         public void drinksIsServed()
         {
             isDrinksServed = true;
@@ -147,7 +139,6 @@ namespace Yarn.Unity.BartenderOdyssey {
             onComplete();
         }
 
->>>>>>> d3c8fc38e727a08448557a1a58acd7ae58a8e9cb
           private bool IsInMeleeRangeOf (Transform target) {
             float distance = Vector3.Distance(transform.position, target.position);
             return distance < meleeRange;
