@@ -47,6 +47,9 @@ public class AudioManager : MonoBehaviour
         AudioClip clip = null;
         switch (mood)
         {
+            case SoundEffectType.Normal:
+                clip = Resources.Load<AudioClip>(SoundEffects.BgmNormal);
+                break;
             case SoundEffectType.Happy:
                 clip = Resources.Load<AudioClip>(SoundEffects.BgmHappy);
                 break;
@@ -63,6 +66,7 @@ public class AudioManager : MonoBehaviour
         {
             bgmSource.Stop();
             bgmSource.clip = clip;
+            bgmSource.volume = 0.2f;
             bgmSource.Play();
         }
     }

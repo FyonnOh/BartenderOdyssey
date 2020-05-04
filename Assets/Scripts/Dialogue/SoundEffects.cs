@@ -4,6 +4,7 @@ using UnityEngine;
 
 public static class SoundEffects
 {
+    public static string BgmNormal { get{return "chilled-to-zero-intro-loop";} }
     public static string BgmHappy { get{return "bensound-slowmotion";} }
     public static string BgmSad { get{return "bensound-tomorrow";} }
 
@@ -42,8 +43,7 @@ public enum SoundEffectType
 {
     Typing,
     Talking,
+    Normal,
     Happy,
-    Sad,
-    Normal
-
+    Sad
 }

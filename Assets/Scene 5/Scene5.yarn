@@ -1,6 +1,7 @@
 title: Scene5
 tags: 
 ---
+<<playBgm AudioManager Normal>>
 Robob: pewp
 <<walkToPlayer Robob>>
 <<waitForMove Robob>>
