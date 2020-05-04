@@ -1,26 +1,51 @@
 title: Scene8
 tags: 
 ---
+<<startled Customer1>>
 <<runIn BarOwner>>
 <<waitForRun BarOwner>>
-<<wait 2>>
-<<breakUpFight BarOwner>>
+<<turnTowardsEntrance Customer1>>
+<<startled Customer1>>
+<<point BarOwner>>
 BarOwner: Hey! Stop this instance before I call the police!
-<<wait 1>>
 <<runToEntrance Customer1>>
-<<rotate_Customer1 Customer1>>
+<<wait 1>>
+<<idle BarOwner>>
 <<wait 2>>
+<<walkToJameson BarOwner>>
+<<waitForWalk>>
+<<crouch BarOwner>>
+<<wait 1>>
+BarOwner: Hey, are you all right?
 <<standUp Jameson>>
+<<wait 4>>
+Jameson: I think so...
+<<riseFromCrouch BarOwner>>
+<<wait 2>>
+<<turnRightTowardsPlayer BarOwner 1>>
 BarOwner: Deckard! What were you doing?!
+<<turnLeftTowardsPlayer Jameson 0.5>>
 BarOwner: This poor guy was beaten up right in front of you, and yet you didn't do anything?!
+<<angryPoint BarOwner>>
 BarOwner: You could have shouted for help or something!
-BarOwner: To think that you could stand there and watch as this poor man gets beaten up. 
+BarOwner: To think that you could stand there and watch as this poor man gets beaten up.
+<<angryGesture BarOwner>>
 BarOwner: Don't you feel anything?!
-<<shakeHead BarOwner>>
 BarOwner: I think I might have put too much faith in you.
-BarOwner: How naive was I to believe that what they say about you is wrong.
+BarOwner: How naive I was to believe that what they say about you is wrong.
 BarOwner: I was hoping you could prove them wrong.
+<<shakeHead BarOwner>>
 BarOwner: But look how the tables have changed. You proved me wrong instead.
+<<sigh BarOwner>>
+BarOwner: I think it's time I get a Human Bartender...
 <<leave BarOwner>>
-<<fadeEnding RedPanel>>
+<<stumbleLeave Jameson>>
+<<wait 2>>
+<<flashRed RedPanel>>
+<<wait 4>>
+<<shutdown RedPanel>>
+<<wait 3>>
+<<showEndScreen RedPanel>>
+<<wait 6>>
+BarOwner: 
 ===

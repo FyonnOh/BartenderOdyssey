@@ -90,11 +90,13 @@ namespace Yarn.Unity
                 Debug.LogWarning($"Line {line.ID} doesn't have any localised text.");
                 text = line.ID;
             }
-
+            Debug.Log($"Line: {text}");
             string characterName = GetCharacterSpeaking(text);
             SpeechBubble speechBubble = _dialogueContainers[characterName];
             speechBubble.OnLineStart(text);
             text = RemoveCharacterName(text);
+
+            float autoCompleteDelay = ExtractAutoCompleteDelay(ref text);
 
             if (textSpeed > 0.0f) {
                 // Display the line one character at a time
@@ -123,6 +125,13 @@ namespace Yarn.Unity
 
             // Indicate to the rest of the game that the line has finished being delivered
             speechBubble.OnLineFinishDisplaying();
+
+            // If autocomplete is specified, mark line as complete after the given delay
+            if (autoCompleteDelay > 0f)
+            {
+                yield return new WaitForSeconds(autoCompleteDelay);
+                MarkLineComplete();
+            }
 
             while (userRequestedNextLine == false) {
                 yield return null;
@@ -290,6 +299,44 @@ namespace Yarn.Unity
 
             // No colon, so there's no name to remove. Just return the whole line.
             return line;
+        }
+
+        // Searches for an {autocomplete} attribute that signals the Dialogue UI
+        // to automatically mark line as complete after the provided delay.
+        // The attribute should be at the start of the line.
+        // Returns the delay as a float.
+        // The original line is modified to remove the attribute after the extraction
+        // is complete.
+        private float ExtractAutoCompleteDelay(ref string line)
+        {
+            float delay = 0f;
+
+            // Check for attribute
+            if (line[0] == '{')
+            {
+                if (line.IndexOf('}') > 0)
+                {
+                    // Extract the autocomplete delay and parse as a float
+                    // Since this is a one-off usecase for BartenderOdyssey,
+                    // It is assumed that only autocomplete attribute is used,
+                    // therefore we ignore any checking for simplicity.
+                    string attribute = line.Split('{', '}')[1];
+                    string delayString = attribute.Substring(attribute.IndexOf('=') + 1);
+                    if (float.TryParse(delayString, out delay) == false)
+                    {
+                        Debug.LogErrorFormat($"Invalid value {delayString} provided with autocomplete");
+                    }
+
+                    // Remove the attribute from the original line
+                    line = line.Substring(line.IndexOf('}') + 1);
+                }
+                else
+                {
+                    Debug.Log("Dangling curly brace found");
+                }
+            }
+
+            return delay;
         }
     }
 }

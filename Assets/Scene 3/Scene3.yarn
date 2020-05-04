@@ -6,7 +6,7 @@ tags:
 <<pointingAction Jameson>>
 Jameson: Hey you! Whiskey on the rocks.
 <<wait 1>>
-Jameson: You know, the sight of the likes of you really disgust me...
+Jameson: You know, the sight of the likes of you really disgusts me...
 <<annoyedAction Jameson>>
 <<wait 1>>
 Jameson: You think you're better than us, don't you? You think that you can just come and do whatever you want and we would be fine with it. 

@@ -8,6 +8,7 @@ namespace Yarn.Unity.BartenderOdyssey
     public class Scene8_BarOwner : MonoBehaviour
     {
         public GameObject breakupWaypoint;
+        public GameObject besideJamesonWaypoint;
         public GameObject entrance;
         public NavMeshAgent agent;
         public Animator anim;
@@ -23,7 +24,8 @@ namespace Yarn.Unity.BartenderOdyssey
         {
             DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
             dialogueRunner.AddCommandHandler("waitForRun", WaitForMove);
-            dialogueRunner.AddCommandHandler("rotateBarOwner", RotateBarOwner);
+            dialogueRunner.AddCommandHandler("waitForWalk", WaitForMove);
+            dialogueRunner.AddCommandHandler("turnRightTowardsPlayer", TurnRightTowardsPlayer);
         }
 
         void Start()
@@ -68,6 +70,13 @@ namespace Yarn.Unity.BartenderOdyssey
             agent.SetDestination(breakupWaypoint.transform.position);
         }
 
+        [YarnCommand("walkToJameson")]
+        public void WalkToJameson()
+        {
+            anim.SetTrigger("Walk");
+            agent.SetDestination(besideJamesonWaypoint.transform.position);
+        }
+
         public void WaitForMove(string[] parameters, System.Action onComplete)
         {
             StartCoroutine(DoWaitForMove(onComplete));
@@ -87,19 +96,57 @@ namespace Yarn.Unity.BartenderOdyssey
 
                 yield return null;
             }
+            // agent.isStopped = true;
+            agent.velocity = Vector3.zero;
             onComplete();
         }
 
-        [YarnCommand("breakUpFight")]
-        public void BreakUpFight()
+        [YarnCommand("point")]
+        public void Point()
         {
-            anim.SetTrigger("BreakUpFight");
+            anim.SetTrigger("Point");
+        }
+
+        [YarnCommand("idle")]
+        public void Idle()
+        {
+            anim.SetTrigger("Idle");
+        }
+
+        [YarnCommand("crouch")]
+        public void Crouch()
+        {
+            anim.SetTrigger("Crouch");
+        }
+
+        [YarnCommand("riseFromCrouch")]
+        public void RiseFromCrouch()
+        {
+            anim.SetTrigger("RiseFromCrouch");
+        }
+
+        [YarnCommand("angryPoint")]
+        public void AngryPoint()
+        {
+            anim.SetTrigger("AngryPoint");
+        }
+
+        [YarnCommand("angryGesture")]
+        public void AngryGesture()
+        {
+            anim.SetTrigger("AngryGesture");
         }
 
         [YarnCommand("shakeHead")]
         public void ShakeHead()
         {
-            anim.SetTrigger("Shake");
+            anim.SetTrigger("ShakeHead");
+        }
+
+        [YarnCommand("sigh")]
+        public void Sigh()
+        {
+            anim.SetTrigger("Sigh");
         }
 
         [YarnCommand("leave")]
@@ -110,29 +157,47 @@ namespace Yarn.Unity.BartenderOdyssey
 
         }
 
-        public void RotateBarOwner(string[] parameters, System.Action onComplete) {
-            StartCoroutine(RotateMe(Vector3.up * 90, 0.8f, onComplete));
+        public void TurnRightTowardsPlayer(string[] parameters, System.Action onComplete) {
+            if (parameters.Length != 2)
+            {
+                Debug.LogErrorFormat("<<turnRightTowardsPlayer>> expects 2 parameters");
+                onComplete();
+                return;
+            }
+
+            if (float.TryParse(parameters[1], out float duration))
+            {
+                anim.SetTrigger("TurnRight");
+                StartCoroutine(DoTurnRightTowardsPlayer(duration, onComplete));
+            }
+            else
+            {
+                Debug.LogErrorFormat($"Invalid number parameter {parameters[1]} for <<turnRightTowardsPlayer>>");
+                onComplete();
+            }
         }
-        IEnumerator RotateMe(Vector3 byAngles, float inTime, System.Action onComplete) 
-        {    
-            var fromAngle = transform.rotation;
-            var toAngle = Quaternion.Euler(transform.eulerAngles + byAngles);
-            for(var t = 0f; t < inTime; t += Time.deltaTime/inTime) {
-                transform.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
+        
+        private IEnumerator DoTurnRightTowardsPlayer(float duration, System.Action onComplete)
+        {
+            Quaternion oldRotation = transform.rotation;
+            Vector3 direction =  player.transform.position - transform.position;
+            // Debug.Log($"Player position: {player.transform.position}; BarOwner position: {transform.position}");
+            // Debug.Log($"Direction vector: {direction}");
+            direction.x = direction.z = 0f;
+            // direction.Normalize();
+
+            Quaternion towards = Quaternion.Euler(transform.eulerAngles + (Vector3.up * 60));
+
+            Vector3 originalForward = transform.forward;
+
+            for (float t = 0f; t < duration; t += Time.deltaTime)
+            {
+                transform.rotation = Quaternion.Slerp(oldRotation, towards, t / duration);
+                transform.rotation = Quaternion.Euler(new Vector3(0f, transform.rotation.eulerAngles.y, 0f));
                 yield return null;
             }
+
             onComplete();
-        }
-
-        private bool IsInMeleeRangeOf (Transform target) {
-            float distance = Vector3.Distance(transform.position, target.position);
-            return distance < meleeRange;
-        }
-
-        private void RotateTowards (Transform target) {
-                Vector3 direction = (target.position - transform.position).normalized;
-                Quaternion lookRotation = Quaternion.LookRotation(direction);
-                transform.rotation = Quaternion.Slerp(transform.rotation, lookRotation, Time.deltaTime * rotationSpeed);
         }
     }
 }
