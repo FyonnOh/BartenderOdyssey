@@ -10,7 +10,11 @@ Robob: Can I have one Martini please?
 <<pointAction Robob>>
 Robob: I was watching you from afar just now and I am sorry that you have to face such terrible customers. 
 Robob: Those before you have experienced the same faith as you, in fact some got it worse! I would say that you got off lucky!
+<<<<<<< HEAD
 <<wait 2>>
+=======
+<<waitForDrinksServed Robob>>
+>>>>>>> d3c8fc38e727a08448557a1a58acd7ae58a8e9cb
 <<headShake Robob>>
 Robob: It is an unfair world we live in. The humans... they treat me like nothing. They treat me as though I have no feelings.
 <<talkAction Robob>>
