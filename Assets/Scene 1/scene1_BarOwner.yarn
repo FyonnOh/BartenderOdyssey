@@ -1,13 +1,45 @@
 title: scene1_BarOwner
 tags: 
 ---
+<<playBgm AudioManager Happy>>
 <<walkToPlayer BarOwner>>
 <<waitForMove BarOwner>>
 <<talkToPlayer BarOwner>>
 <<wait 1>>
 BarOwner: Hello Deckard. It is your first day of work today. 
 BarOwner: Oh don't be nervous, you will be fine.
-BarOwner: You better start practising before the customers start coming!
+BarOwner: You've got me here. Come, let me guide you through.
+BarOwner: This here on the table is your trusty mixer. It may be obvious, but you use this to mix and create your drinks.
+BarOwner: This mixer will be your partner from today, so I hope you guys play well.
+BarOwner: Oh, if you ever drop him, don't worry. You guys are bonded. Pressing the Grab button to call your mixer back to you!
+BarOwner: To start making drinks, you gotta have your ingredients. In the old days, people used to store different liquors in bottles.
+BarOwner: Yeah, don't know how they survived either.
+BarOwner: Nowadays, we keep our ingredients nicely kept and preserved as tiny capsules. Works way better and preserves the taste too.
+BarOwner: We keep the capsules tucked nicely in capsule dispensers, like the one with the red button on your left.
+BarOwner: Go ahead, push that big button, you know you want to. Just put your mixer under the guiding laser, and the capsules will pop out.
+<<waitForRedButton BarOwner>>
+BarOwner: Easy right? Normally, a bar will have many different capsules and by trying different combinations, you can get different drinks.
+BarOwner: Unfortunately, there was a... problem with the delivery system, and this red one is the only one that made it so far.
+BarOwner: But hey, that's okay. This red capsule is exactly what we need to create the classic 'Blazing Sunset'.
+BarOwner: A fine drink that brings back many memories.
+BarOwner: To make the Blazing Sunset, just pop exactly three of those bad boys into your mixer and start mixing.
+BarOwner: ...
+BarOwner: Don't worry, as I mentioned just now, this mixer can do everything!
+BarOwner: Just put on the black cover, give it 5 seconds, and it will automatically create the drink.
+BarOwner: Go on, try it!
+<<waitForMixer BarOwner>>
+BarOwner: If you're wondering how the mixer works, well, it's pretty simple.
+BarOwner: Using the moisture in the air and the state of the art sensors, it perfectly blends and control the temperature within itself to create the perfect drink!
+BarOwner: ...Or so I've read this from the back of the box when I bought.
+BarOwner: Anyway it looks like your drink is ready! 
+BarOwner: Just take note that if you ever remove the cover, the drink is just going to evaporate. This is what you get when you deal with the best.
+BarOwner: Come, serve me a cup. You can get one from the dispenser with the glassy button.
+<<waitForGlassButton BarOwner>>
+BarOwner: ...
+BarOwner: You don't need me to teach you how to pour right? Come on, you can do this last task.
+BarOwner: Just make sure it's at least half-full. Don't want to make our customers dissapointed!
+BarOwner: When you're done place the cup on this coaster here, and if it's the correct drink and amount, it'll turn green, which means you got the order right!
+BarOwner: If it's red... let's hope they don't get mad.
 <<waitForDrinksServed BarOwner>>
 BarOwner: See, that wasn't so bad. With our state of the art technology, creating the best drinks is a breeze.
 BarOwner: Alright, I got my own work to do as well. I know your first day will sail smoothly. 

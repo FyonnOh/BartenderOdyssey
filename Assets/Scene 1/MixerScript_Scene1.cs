@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Yarn.Unity.BartenderOdyssey;
 
-public class MixerScript : MonoBehaviour
+public class MixerScript_Scene1 : MonoBehaviour
 {
     // Recipes
     //List<string> redJuice = new List<string>();
@@ -30,10 +31,8 @@ public class MixerScript : MonoBehaviour
     public ParticleSystem mixParticle;
     public ParticleSystem destroyParticle;
 
-    public bool getIsCovered()
-    {
-        return isCovered;
-    }
+    public GameObject barOwner;
+
     private void initRedDrink()
     {
         redJuice.Add("Red");
@@ -89,6 +88,8 @@ public class MixerScript : MonoBehaviour
 
         coverChild.SetActive(true);
         isCovered = true;
+
+        
     }
 
     public void removeCover()
@@ -122,12 +123,13 @@ public class MixerScript : MonoBehaviour
         {
             closeCover();
             isCovered = false;
-        } else
+        }
+        else
         {
             addCover();
             isCovered = true;
             isDoneMixing = false;
-            
+
         }
     }
 
@@ -203,7 +205,7 @@ public class MixerScript : MonoBehaviour
             (right.getObjName().Equals("Mixer") && left.getObjName().Equals("Top Cover")))
         {
             removeCover();
-           
+
         }
     }
 
@@ -218,6 +220,7 @@ public class MixerScript : MonoBehaviour
     {
         if (isCovered)
         {
+            barOwner.GetComponent<Scene1_BarOwner_WayPointControl>().closeMixer();
             topCover.transform.position = coverChild.transform.position;
             topCover.transform.rotation = coverChild.transform.rotation;
 
@@ -240,7 +243,7 @@ public class MixerScript : MonoBehaviour
                 mixerTimer += Time.deltaTime;
                 //print(mixerTimer);
             }
-        } 
+        }
         else
         {
             if (mixSound.isPlaying)

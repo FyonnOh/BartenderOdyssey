@@ -3,26 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using Yarn.Unity.BartenderOdyssey;
 
-public class CustomerCollisionDetector : MonoBehaviour
+public class GlassButtonActivator_Scene1 : MonoBehaviour
 {
-    public GameObject customer1;
+    public PillDispenser pd;
+    public GameObject barowner;
+
     public void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Grabbable"))
-        {
-            customer1.GetComponent<Scene6_Customer1>().getHit();
-        }
+        pd.DispensePill();
+        barowner.GetComponent<Scene1_BarOwner_WayPointControl>().pushGlassButton();
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }

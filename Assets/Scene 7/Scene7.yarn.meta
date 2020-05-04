@@ -8,17 +8,26 @@ ScriptedImporter:
   assetBundleName: 
   assetBundleVariant: 
   script: {fileID: 11500000, guid: 94073015eacc34c1d8fc6786e43d60ca, type: 3}
-  baseLanguageID: 
-  stringIDs: []
-  compilationStatus: 0
-  isSuccesfullyCompiled: 0
+  baseLanguageID: en-SG
+  stringIDs:
+  - Scene7-Scene7-0
+  - Scene7-Scene7-1
+  - Scene7-Scene7-2
+  - Scene7-Scene7-3
+  - Scene7-Scene7-4
+  - Scene7-Scene7-5
+  - Scene7-Scene7-6
+  - Scene7-Scene7-7
+  compilationStatus: 1
+  isSuccesfullyCompiled: 1
   compilationErrorMessage: 'Error on line 1 at position 1:
 
     mismatched input
     ''<EOF>'' expecting ''title:''
 
-    
+
 
 '
-  baseLanguage: {instanceID: 0}
+  baseLanguage: {fileID: 7128917941130120860, guid: 28f1d0f3e68aed143ac96d632e3db525,
+    type: 3}
   localizations: []

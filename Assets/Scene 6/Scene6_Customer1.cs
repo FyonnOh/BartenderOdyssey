@@ -15,11 +15,15 @@ namespace Yarn.Unity.BartenderOdyssey {
 
         public Animator anim;
 
+        private bool isHit = false;
+
         void Awake()
         {
             DialogueRunner dialogueRunner = FindObjectOfType<DialogueRunner>();
             dialogueRunner.AddCommandHandler("waitForMove_Customer1", WaitForMove_Customer1);
             dialogueRunner.AddCommandHandler("rotate_Customer1", Rotate_Customer1);
+
+            dialogueRunner.AddCommandHandler("waitForHit_Customer1", WaitForHit_Customer1);
         }
         void Start()
         {
@@ -90,6 +94,27 @@ namespace Yarn.Unity.BartenderOdyssey {
                 transform.rotation = Quaternion.Slerp(fromAngle, toAngle, t);
                 yield return null;
             }
+            onComplete();
+        }
+
+        public void getHit()
+        {
+            isHit = true;
+        }
+
+        public void WaitForHit_Customer1(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForHit(onComplete));
+        }
+
+        private IEnumerator DoWaitForHit(System.Action onComplete)
+        {
+
+            while (!isHit)
+            {
+                yield return null;
+            }
+
             onComplete();
         }
     }

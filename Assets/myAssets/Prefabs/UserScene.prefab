@@ -206,7 +206,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1636898689}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -299,7 +299,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1689044537}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -479,7 +479,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   liquid: {fileID: 1213371045155176623}
-  fillSpeed: 0.001
 --- !u!54 &794111213594574967
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1182,7 +1181,7 @@ PrefabInstance:
     - target: {fileID: 6344958993614049079, guid: 1cef71ce28ab3a746a5513bb2b912b75,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.256
+      value: 0.553
       objectReference: {fileID: 0}
     - target: {fileID: 6344958993614049079, guid: 1cef71ce28ab3a746a5513bb2b912b75,
         type: 3}
@@ -1756,7 +1755,7 @@ PrefabInstance:
     - target: {fileID: 8709500015604592752, guid: 6ae1ef7d04fa14e48b227e295b65d909,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 3189604146068740035, guid: 6ae1ef7d04fa14e48b227e295b65d909, type: 3}

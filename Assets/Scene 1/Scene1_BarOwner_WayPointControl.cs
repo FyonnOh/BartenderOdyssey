@@ -27,7 +27,9 @@ namespace Yarn.Unity.BartenderOdyssey {
         private bool hasStarted = false;
 
         private bool isDrinksServed = false;
-
+        private bool isRedButtonPushed = false;
+        private bool isGlassButtonPushed = false;
+        private bool isMixerClosed = false;
 
         void Awake()
         {
@@ -35,6 +37,10 @@ namespace Yarn.Unity.BartenderOdyssey {
             dialogueRunner.AddCommandHandler("waitForMove", WaitForMove);
 
             dialogueRunner.AddCommandHandler("waitForDrinksServed", WaitForDrinksServed);
+
+            dialogueRunner.AddCommandHandler("waitForRedButton", WaitForRedButton);
+            dialogueRunner.AddCommandHandler("waitForMixer", WaitForMixer);
+            dialogueRunner.AddCommandHandler("waitForGlassButton", WaitForGlassButton);
         }
         void Start()
         {
@@ -109,6 +115,76 @@ namespace Yarn.Unity.BartenderOdyssey {
             onComplete();
         }
 
+        // RED BUTTON
+        public void pushRedButton()
+        {
+            isRedButtonPushed = true;
+        }
+
+        public void WaitForRedButton(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForRedButton(onComplete));
+        }
+
+        private IEnumerator DoWaitForRedButton(System.Action onComplete)
+        {
+            isRedButtonPushed = false;
+            while (!isRedButtonPushed)
+            {
+                //print(isDrinksServed);
+                yield return null;
+            }
+
+            onComplete();
+        }
+
+        // MIXER
+        public void closeMixer()
+        {
+            isMixerClosed = true;
+        }
+
+        public void WaitForMixer(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForMixer(onComplete));
+        }
+
+        private IEnumerator DoWaitForMixer(System.Action onComplete)
+        {
+            isMixerClosed = false;
+            while (!isMixerClosed)
+            {
+                //print(isDrinksServed);
+                yield return null;
+            }
+
+            onComplete();
+        }
+
+        // GLASS BUTTON
+        public void pushGlassButton()
+        {
+            isGlassButtonPushed = true;
+        }
+
+        public void WaitForGlassButton(string[] parameters, System.Action onComplete)
+        {
+            StartCoroutine(DoWaitForGlassButton(onComplete));
+        }
+
+        private IEnumerator DoWaitForGlassButton(System.Action onComplete)
+        {
+            isGlassButtonPushed = false;
+            while (!isGlassButtonPushed)
+            {
+                //print(isDrinksServed);
+                yield return null;
+            }
+
+            onComplete();
+        }
+
+        // DRINK SERVED
         public void drinksIsServed()
         {
             isDrinksServed = true;

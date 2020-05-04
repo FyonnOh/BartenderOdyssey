@@ -1,11 +1,12 @@
 title: Scene3
 tags: 
 ---
+<<playBgm AudioManager Sad>>
 <<walkToPlayer Jameson>>
 <<waitForMove Jameson>>
 <<pointingAction Jameson>>
 Jameson: Hey you! Whiskey on the rocks.
-<<wait 1>>
+<<waitForDrinksServed Jameson>>
 Jameson: You know, the sight of the likes of you really disgust me...
 <<annoyedAction Jameson>>
 <<wait 1>>
