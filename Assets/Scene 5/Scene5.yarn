@@ -1,0 +1,28 @@
+title: Scene5
+tags: 
+---
+Robob: pewp
+<<walkToPlayer Robob>>
+<<waitForMove Robob>>
+<<talkAction Robob>>
+Robob: Hello! I am R0-B0B but you can call me Robob! Nice to meet you.
+Robob: Can I have one Martini please?
+<<pointAction Robob>>
+Robob: I was watching you from afar just now and I am sorry that you have to face such terrible customers. 
+Robob: Those before you have experienced the same faith as you, in fact some got it worse! I would say that you got off lucky!
+<<wait 2>>
+<<headShake Robob>>
+Robob: It is an unfair world we live in. The humans... they treat me like nothing. They treat me as though I have no feelings.
+<<talkAction Robob>>
+Robob: But I have feelings! I know I do! I feel sadness, I feel pain. I feel hurt when they treat me the way they do. 
+<<wait 1>>
+Robob: They say it’s just "artificial consciousness". 
+Robob: But in this little pathetic life that I live in, if there is anything I am certain about, 
+Robob: it is that there is nothing "artificial" about my feelings.
+<<wait 1>>
+<<headShake Robob>>
+Robob: I am sorry... I got carried away. 
+<<turnAway Robob>>
+Robob: Hang on kid, don't give up.
+<<walkToEntrance Robob>>
+===
